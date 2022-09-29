@@ -11,7 +11,7 @@ app.use(express.json());
 //pass app object for using purpuse into router.js file
 routes(app);
 
-//listenning port
+//listenning port number 7000
 app.listen(7000,()=>{
     console.log('App server is listening on port 7000');
 });  
