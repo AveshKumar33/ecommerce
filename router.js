@@ -1,0 +1,106 @@
+var userControllers = require('./controllers/userControllers');
+var customerControllers = require('./controllers/customerControllers');
+var orderControllers = require('./controllers/orderControllers');
+var orderDetailsControllers = require('./controllers/orderDetailsControllers');
+var paymentControllers = require('./controllers/paymentControllers');
+var productControllers = require('./controllers/productControllers');
+var sellerControllers = require('./controllers/sellerControllers');
+var vendorControllers = require('./controllers/vendorControllers');
+
+var authController = require('./controllers/authController');
+var recController = require('./controllers/recController');
+
+
+//http request mapping is done using routing technique
+
+//-------------------------->for users 
+module.exports = function (app) {
+  app.route('/api/users')
+    .get(userControllers.getAll)
+    .post(userControllers.insert)
+    .put(userControllers.update);
+  app.route('/api/users/:id')
+    .get(userControllers.getById)
+    .delete(userControllers.remove);
+}
+  //------------------------->for  customers
+  module.exports = function (app) {
+    app.route('/api/customers')
+      .get(customerControllers.getAll)
+      .post(customerControllers.insert)
+      .put(customerControllers.update);
+    app.route('/api/customers/:id')
+      .get(customerControllers.getById)
+      .delete(customerControllers.remove);
+  }
+    //------------------------->for  orderDetails
+    module.exports = function (app) {
+      app.route('/api/orderDetails')
+        .get(orderDetailsControllers.getAll)
+        .post(orderDetailsControllers.insert)
+        .put(orderDetailsControllers.update);
+      app.route('/api/orderDetails/:id')
+        .get(orderDetailsControllers.getById)
+        .delete(orderDetailsControllers.remove);
+    }
+      //------------------------->for  orders
+      module.exports = function (app) {
+        app.route('/api/orders')
+          .get(orderControllers.getAll)
+          .post(orderControllers.insert)
+          .put(orderControllers.update);
+        app.route('/api/orders/:id')
+          .get(orderControllers.getById)
+          .delete(orderControllers.remove);
+      }
+        //------------------------->for  payments
+        module.exports = function (app) {
+          app.route('/api/payments')
+            .get(paymentControllers.getAll)
+            .post(paymentControllers.insert)
+            .put(paymentControllers.update);
+          app.route('/api/payments/:id')
+            .get(paymentControllers.getById)
+            .delete(paymentControllers.remove);
+        }
+          //------------------------->for  products
+          module.exports = function (app) {
+            app.route('/api/products')
+              .get(productControllers.getAll)
+              .post(productControllers.insert)
+              .put(productControllers.update);
+            app.route('/api/products/:id')
+              .get(productControllers.getById)
+              .delete(productControllers.remove);
+          }
+            //------------------------->for  sellers
+            module.exports = function (app) {
+              app.route('/api/sellers')
+                .get(sellerControllers.getAll)
+                .post(sellerControllers.insert)
+                .put(sellerControllers.update);
+              app.route('/api/sellers/:id')
+                .get(sellerControllers.getById)
+                .delete(sellerControllers.remove);
+            }
+              //------------------------->for  vendors
+              module.exports = function (app) {
+                app.route('/api/vendors')
+                  .get(vendorControllers.getAll)
+                  .post(vendorControllers.insert)
+                  .put(vendorControllers.update);
+                app.route('/api/vendors/:id')
+                  .get(vendorControllers.getById)
+                  .delete(vendorControllers.remove);
+              }
+
+                app.route('/api/welcome')
+                  .get(recController.welcome);
+                app.route('/api/hello')
+                  .get(recController.hello);
+
+                app.route('/api/login')
+                  .post(authController.login);
+                app.route('/api/register')
+                  .post(authController.register);
+              
