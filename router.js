@@ -18,18 +18,17 @@ module.exports = function (app) {
           .get(userControllers.getAll)
           .post(userControllers.insert)
           .put(userControllers.update);
-       app.route('/api/users/:id')
+       app.route('/api/users/:user_id')
           .get(userControllers.getById)
           .delete(userControllers.remove);
 
 //------------------------->for  customers
 
-   console.log('users')
       app.route('/api/customers')
          .get(customerControllers.getAll)
          .post(customerControllers.insert)
          .put(customerControllers.update);
-      app.route('/api/customers/:id')
+      app.route('/api/customers/:customer_id')
          .get(customerControllers.getById)
          .delete(customerControllers.remove);
 
@@ -39,7 +38,7 @@ module.exports = function (app) {
          .get(orderDetailsControllers.getAll)
          .post(orderDetailsControllers.insert)
          .put(orderDetailsControllers.update);
-      app.route('/api/orderDetails/:id')
+      app.route('/api/orderDetails/:order_det_id')
          .get(orderDetailsControllers.getById)
          .delete(orderDetailsControllers.remove);
 
@@ -59,7 +58,7 @@ module.exports = function (app) {
           .get(paymentControllers.getAll)
           .post(paymentControllers.insert)
           .put(paymentControllers.update);
-       app.route('/api/payments/:id')
+       app.route('/api/payments/:payment_id')
           .get(paymentControllers.getById)
           .delete(paymentControllers.remove);
  

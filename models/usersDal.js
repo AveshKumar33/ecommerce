@@ -3,7 +3,6 @@ const sql=require('./db');
 
 //get all data from databases table
   exports.getAll=function(){
-    console.log('dal');
           return new Promise (resolve=>{
                  let command="select * from users";
                  sql.query(command,(err,rows,fields)=>{
@@ -22,10 +21,10 @@ const sql=require('./db');
                  let command="select * from users where user_id="+user_id ;
                  sql.query(command,(err,rows,fields)=>{
                      if(!err){
+
                         resolve(rows);
                      }
                      else{
-                        console.log('usersDal')
                          resolve(err);
                      }
         })
@@ -43,7 +42,7 @@ const sql=require('./db');
                 let email=req.body.email;
                 let psw=req.body.password;
                 let rl=req.body.role;
-                let command="INSERT INTO users (`use_id`,`first_name`,`last_name`,`contact_number`,`email`,`password`,`role`) VALUES ("+id+",'"+fn+"','"+ln+"','"+cnt+"','"+email+"','"+psw+"','"+rl+"')";
+                let command="INSERT INTO users (`user_id`,`first_name`,`last_name`,`contact_number`,`email`,`password`,`role`) VALUES ("+id+",'"+fn+"','"+ln+"','"+cnt+"','"+email+"','"+psw+"','"+rl+"')";
                     sql.query(command,(err,rows,fields)=>{
                         if(!err){
                            resolve(rows);
@@ -60,7 +59,7 @@ const sql=require('./db');
            return new Promise (resolve=>{
           // console.log(req.body.fname)
                   let command='UPDATE users SET first_name = ? WHERE user_id = ?'; 
-                      sql.query(command,[req.body.fname,req.body.user_id],(err,rows,fields)=>{
+                      sql.query(command,[req.body.first_name,req.body.user_id],(err,rows,fields)=>{
                           if(!err){
                              resolve(rows);
                             }
@@ -74,7 +73,7 @@ const sql=require('./db');
 //data remove from database table based on perticuler id
   exports.remove=function(user_id){
           return new Promise (resolve=>{
-          let command="DELETE from employees where user_id="+user_id ;
+          let command="DELETE from users where user_id="+user_id ;
                  sql.query(command,(err,rows,fields)=>{
                      if(!err){
                        resolve(rows);

@@ -1,7 +1,6 @@
 var dal= require('../models/usersDal');
 //get all data from database table
   exports.getAll=async (req,res)=>{
-    console.log('userControllers2');
           let results=[];
            //here dal.js file getAll method is calling
              results=await dal.getAll();
@@ -12,6 +11,7 @@ var dal= require('../models/usersDal');
   exports.getById=async function(req,res){
           let results=[];
             //here dal.js file getById method is calling
+            //console.log(req.params.user_id)
               results=await dal.getById(req.params.user_id);
               res.send(results);
           };

@@ -32,7 +32,7 @@ CREATE TABLE Orders (order_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, order_dat
 			CONSTRAINT fk_Orders_Users FOREIGN KEY(user_id) REFERENCES Users(User_id));
 
 CREATE TABLE Order_details (order_det_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, quantity VARCHAR(20), order_id INT NOT NULL,product_id INT NOT NULL,
-			CONSTRAINT fk_Orders_details_Orders FOREIGN KEY(order_id) REFERENCES orders(User_id),
+			CONSTRAINT fk_Orders_details_Orders FOREIGN KEY(order_id) REFERENCES orders(order_id),
             CONSTRAINT fk_Orders_details_Products FOREIGN KEY(product_id) REFERENCES Products(product_id));
 
 CREATE TABLE Payments(payment_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,order_id INT, 

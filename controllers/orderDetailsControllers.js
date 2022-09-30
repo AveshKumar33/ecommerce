@@ -11,7 +11,7 @@ var dal= require('../models/orderDetailsDal');
   exports.getById=async function(req,res){
           let results=[];
             //here dal.js file getById method is calling
-              results=await dal.getById(req.params.id);
+              results=await dal.getById(req.params.order_det_id);
               res.send(results);
           };
 //inserting data into database table    
@@ -32,7 +32,7 @@ var dal= require('../models/orderDetailsDal');
   exports.remove=async(req,res)=>{
           let results=[];
              //here dal.js file remove method is calling
-               results=await dal.remove(req.params.id);
+                results=await dal.remove(req.params.order_det_id);
                 res.send(results);
            };
 
