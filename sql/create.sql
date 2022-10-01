@@ -38,3 +38,12 @@ CREATE TABLE Order_details (order_det_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
 CREATE TABLE Payments(payment_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,order_id INT, 
     amount float, payment_mode varchar(50),transaction_id  varchar(50) NOT NULL,
 			CONSTRAINT fk_payments_orders FOREIGN KEY(order_id) REFERENCES orders(order_id));
+
+      =======================================================================================================================================
+      
+              CREATE TABLE Scanners(transaction_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,transaction_date DATETIME DEFAULT CURRENT_TIMESTAMP ,account_id INT, amount INT, payment_mode VARCHAR(50),
+operation VARCHAR(1) NOT NULL,
+			CONSTRAINT fk_Scanner_accounts FOREIGN KEY(account_id) REFERENCES Accounts(account_id));
+
+      
+      CREATE TABLE Accounts(account_id  INT NOT NULL PRIMARY KEY AUTO_INCREMENT, balance FLOAT);
