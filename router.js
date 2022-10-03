@@ -10,6 +10,10 @@ var vendorControllers = require('./controllers/vendorControllers');
 var authController = require('./controllers/authController');
 var recController = require('./controllers/recController');
 
+//-------------------------------------------------------------new
+var categoryControllers = require("./Controllers/categoryControllers");
+var cartController = require('./Controllers/cartController');
+
 //http request mapping is done using routing technique
 
 //-------------------------->for users 
@@ -81,7 +85,6 @@ module.exports = function (app) {
          app.route('/api/sellers/:id')
             .get(sellerControllers.getById)
             .delete(sellerControllers.remove);
-
 //--------------------------->for  vendors
   
         app.route('/api/vendors')
@@ -92,7 +95,28 @@ module.exports = function (app) {
            .get(vendorControllers.getById)
            .delete(vendorControllers.remove);
 
+//--------------------------->for  categories
+  
+       app.route('/api/categories')
+          .get(categoryControllers.getAll)
+          .post(categoryControllers.insert)
+          .put(categoryControllers.update);
+       app.route('/api/vendors/:id')
+          .get(categoryControllers.getById)
+          .delete(categoryControllers.remove);
 
+
+//------------------------------>for carts
+//this logic is rum on webserver but temprary store here
+         app.route('/api/cart')
+            .get(cartController.visitInProduct);
+         app.route('/api/cart/:id')
+           .post(cartController.productAddToCart)
+           .delete(cartController.productRemoveFromCartById)
+        app.route('/api/cart/destroy')
+           .delete(cartController.checkout)
+
+           
 //------------------------------------>
 
         app.route('/api/welcome')
@@ -104,4 +128,21 @@ module.exports = function (app) {
            .post(authController.login);
        app.route('/api/register')
            .post(authController.register);
+
+
+//-------------------------------------------------------
+
+
+                 
+
+    
+
+
+
+
+
+
+
+
+
 }

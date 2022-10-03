@@ -34,6 +34,5 @@ var dal= require('../models/sellersDal');
              //here dal.js file remove method is calling
                results=await dal.remove(req.params.id);
                 res.send(results);
-           };
+           }
 
-     
