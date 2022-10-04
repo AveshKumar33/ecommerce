@@ -14,10 +14,10 @@ exports.getOrderList=async (req,res)=>{
            res.send(results);
         };
 
-        exports.getUserRole=async (req,res)=>{
+        exports.getUserDetails=async (req,res)=>{
             let results=[];
              //here dal.js file getAll method is calling
-               results=await dal.getUserRole();
+               results=await dal.getUserDetails();
                res.send(results);
             };
 

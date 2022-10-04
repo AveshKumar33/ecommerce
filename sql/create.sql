@@ -47,3 +47,10 @@ operation VARCHAR(1) NOT NULL,
 
       
       CREATE TABLE Accounts(account_id  INT NOT NULL PRIMARY KEY AUTO_INCREMENT, balance FLOAT);
+ ===================================================================================================================
+ getorderderdetails
+  select u.first_name,u.last_name,u.email,u.password,u.contact_number,u.role,c.billing_address,c.delivery_address,
+  o.order_date,o.status from users u inner join customers c
+  on u.user_id=c.customer_id
+  inner join orders o
+  on u.user_id=o.order_id;        
