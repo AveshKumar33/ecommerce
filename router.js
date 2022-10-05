@@ -6,6 +6,8 @@ var paymentControllers = require('./controllers/paymentControllers');
 var productControllers = require('./controllers/productControllers');
 var sellerControllers = require('./controllers/sellerControllers');
 var vendorControllers = require('./controllers/vendorControllers');
+var accountControllers = require('./controllers/accountControllers');
+
 
 var authController = require('./controllers/authController');
 var recController = require('./controllers/recController');
@@ -117,6 +119,15 @@ module.exports = function (app) {
            .delete(cartController.checkout)
 
            
+//this logic is rum on webserver but temprary store here
+        app.route('/api/accounts')
+           .get(accountControllers.getAll)
+           .post(accountControllers.insert)
+          .put(accountControllers.update);
+        app.route('/api/cart/:id')
+           .get(accountControllers.getById)
+           .delete(accountControllers.remove);
+
 //------------------------------------>
 
         app.route('/api/welcome')

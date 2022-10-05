@@ -1,4 +1,4 @@
-var dal= require('../models/customersDal');
+var dal= require('../models/accountsDal');
 //get all data from database table
   exports.getAll=async (req,res)=>{
           let results=[];

@@ -53,4 +53,58 @@ operation VARCHAR(1) NOT NULL,
   o.order_date,o.status from users u inner join customers c
   on u.user_id=c.customer_id
   inner join orders o
-  on u.user_id=o.order_id;        
+  on u.user_id=o.order_id;   
+
+
+  ========================new DB avesh====================================================================
+  	create database avesh;
+    use  avesh;
+   CREATE TABLE users (userid INT NOT NULL PRIMARY KEY AUTO_INCREMENT, loginname VARCHAR(60),password VARCHAR(60),address VARCHAR(60));
+      
+    
+	CREATE TABLE Customers(customerid INT NOT NULL PRIMARY KEY AUTO_INCREMENT,userid INT NOT NULL,
+  CONSTRAINT fk_Customers_users FOREIGN KEY(userid) REFERENCES Users(userid));
+
+          
+ CREATE TABLE Orders (orderid INT NOT NULL PRIMARY KEY AUTO_INCREMENT,  orderdate DATETIME DEFAULT CURRENT_TIMESTAMP,  totalamount float(20),
+  customerid INT NOT NULL,orderstatus varchar(20),
+CONSTRAINT fk_Orders_customers FOREIGN KEY(customerid) REFERENCES customers(customerid));
+
+            
+ CREATE TABLE accounts (accountid INT NOT NULL PRIMARY KEY AUTO_INCREMENT,  accountcteateddate DATETIME DEFAULT CURRENT_TIMESTAMP,  balance float(20),
+  userid INT NOT NULL,
+CONSTRAINT fk_accounts_users FOREIGN KEY(userid) REFERENCES users(userid));
+                                                
+                                                                                         
+  CREATE TABLE transactions (transactionid INT NOT NULL PRIMARY KEY AUTO_INCREMENT,date DATETIME DEFAULT CURRENT_TIMESTAMP,  amount float(20),
+  fromaccountid INT NOT NULL, toaccountid INT NOT NULL,
+CONSTRAINT fk_transactions_accounts_1 FOREIGN KEY(fromaccountid) REFERENCES accounts(accountid),
+CONSTRAINT fk_transactions_accounts_2 FOREIGN KEY(toaccountid) REFERENCES accounts(accountid));
+
+ CREATE TABLE payments (paymentid INT NOT NULL PRIMARY KEY AUTO_INCREMENT,date DATETIME DEFAULT CURRENT_TIMESTAMP,  amount float(20),paymentmode varchar(20),
+  orderid INT NOT NULL, transactionid INT NOT NULL,
+CONSTRAINT fk_payments_orders FOREIGN KEY(orderid) REFERENCES orders(orderid),
+CONSTRAINT fk_payments_transactions FOREIGN KEY(transactionid) REFERENCES transactions(transactionid));
+                                                              
+   CREATE TABLE Products(productid INT NOT NULL AUTO_INCREMENT PRIMARY KEY, title VARCHAR(50) NOT NULL, imageurl VARCHAR(300) NOT NULL,
+ 			unitPrice INT NOT NULL,stockavaiables INT NOT NULL,category VARCHAR(50));
+		
+                              
+                                                                                         
+  
+  CREATE TABLE orderdetails (orderdetailsid INT NOT NULL PRIMARY KEY AUTO_INCREMENT, items int, orderid INT NOT NULL,productid INT NOT NULL,
+			CONSTRAINT fk_Orders_details_Orders FOREIGN KEY(orderid) REFERENCES orders(orderid),
+            CONSTRAINT fk_Orders_details_Products FOREIGN KEY(productid) REFERENCES Products(productid));
+
+
+   CREATE TABLE Vendors(vendorid INT NOT NULL PRIMARY KEY AUTO_INCREMENT,userid INT NOT NULL,
+  CONSTRAINT fk_Vendors_users FOREIGN KEY(userid) REFERENCES Users(userid));
+ 
+  
+  
+  
+    CREATE TABLE deliveries(deliveryid INT NOT NULL PRIMARY KEY AUTO_INCREMENT,vendorid INT NOT NULL,orderid INT NOT NULL,
+  CONSTRAINT fk_deliveries_Vendors FOREIGN KEY(vendorid) REFERENCES vendors(vendorid),
+    CONSTRAINT fk_deliveries_orders FOREIGN KEY(orderid) REFERENCES orders(orderid));
+
+     

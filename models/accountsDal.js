@@ -5,7 +5,7 @@ const sql=require('./db');
 //get all data from databases table
   exports.getAll=function(){
           return new Promise (resolve=>{
-                 let command="select * from customers";
+                 let command="select * from accounts";
                  sql.query(command,(err,rows,fields)=>{
                      if(!err){
                         resolve(rows);
@@ -19,7 +19,7 @@ const sql=require('./db');
 //data get from database table based on perticuler id
   exports.getById=function(id){
           return new Promise (resolve=>{
-                 let command="select * from customers where customerid="+id ;
+                 let command="select * from accounts where accountid="+id ;
                  sql.query(command,(err,rows,fields)=>{
                      if(!err){
                         resolve(rows);
@@ -35,9 +35,12 @@ const sql=require('./db');
   exports.insert=function(req){
          //console.log(req.body);
          return new Promise (resolve=>{
-                let id=req.body.id;
+                let id=req.body.accountid;
+                let acd=req.body.accountcteateddate;
+                let bal=req.body.balance;
                 let ui=req.body.userid;
-                let command="INSERT INTO customers (`customerid`,`userid`) VALUES ("+id+",'"+ui+"')";
+    
+                let command="INSERT accounts (`accountid`,`accountcteateddate`,`balance`,`userid`) VALUES ("+id+",'"+acd+"','"+bal+"','"+ui+"')";
                     sql.query(command,(err,rows,fields)=>{
                         if(!err){
                            resolve(rows);
@@ -50,11 +53,9 @@ const sql=require('./db');
 };
 //data update from database table based on perticuler id
    exports.update=function(req){
-           //console.log(req.body);
            return new Promise (resolve=>{
-          // console.log(req.body.fname)
-                  let command='UPDATE customers SET userid = ? WHERE customerid = ?'; 
-                      sql.query(command,[req.body.id,req.body.userid],(err,rows,fields)=>{
+                  let command='UPDATE accounts SET balance = ? WHERE accountid = ?'; 
+                      sql.query(command,[req.body.balance,req.body.accountid],(err,rows,fields)=>{
                           if(!err){
                              resolve(rows);
                             }
@@ -66,9 +67,9 @@ const sql=require('./db');
 };
 
 //data remove from database table based on perticuler id
-  exports.remove=function(customer_id){
+  exports.remove=function(id){
           return new Promise (resolve=>{
-          let command="DELETE from customers where customerid="+id ;
+          let command="DELETE fromaccounts where accountid="+id ;
                  sql.query(command,(err,rows,fields)=>{
                      if(!err){
                        resolve(rows);
