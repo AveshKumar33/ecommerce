@@ -107,4 +107,12 @@ CONSTRAINT fk_payments_transactions FOREIGN KEY(transactionid) REFERENCES transa
   CONSTRAINT fk_deliveries_Vendors FOREIGN KEY(vendorid) REFERENCES vendors(vendorid),
     CONSTRAINT fk_deliveries_orders FOREIGN KEY(orderid) REFERENCES orders(orderid));
 
-     
+CREATE PROCEDURE `Debit` (IN amount float, IN fromaccount int,IN toaccount int)
+BEGIN
+START TRANSACTION;
+SET @Amount=amount;
+SET @FromAccount=fromaccount;
+SET @ToAccount=toaccount;
+UPDATE accounts SET balance=balance-@Amount WHERE accountid=@FromAccount;
+COMMIT; 
+END
