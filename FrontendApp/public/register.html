@@ -1,44 +1,39 @@
+<!DOCTYPE html>   
+<html>   
+<head>  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<title><h1 style="color:red;">registration Page</h1></title>
+<script src="/scripts/app.js"></script>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Login and Registraion form</title>
-	<link rel="stylesheet" href="styles/stylesheet.css">
-</head>
-<body>
-    <div>
-    <a href="index.html">Home</a> | <a href="list.html">Catalog</a>|<a href="login.html">login</a>
-	|<a href="register.html">register</a>|<a href="details.html">productDetailById</a>|<a href="orders.html">orderDetails</a>
-</div>
+</head>    
+<body>   
     <hr/>
-	<div class="Main">
-		<div class="form-box">
-			<div class="button-box">
-				<div id="btn"></div>
-				<button type="button" class="toggle-btn" onclick="login()">Login</button>
-				<button type="button" class="toggle-btn" onclick="register()">Register</button>
-			</div>
-			    <div class="social-icons">
-					<img src="img/fb.png">
-					<img src="img/in.png">
-					<img src="img/tw.png">
-		    	</div>
-		    	<form id="login" class="input-group">
-		    		<input type="text" class="input-field" placeholder="User Id" required>
-		    		<input type="text" class="input-field" placeholder="Enter-Password" required>
-		    		<input type="checkbox" class="check-box"><span>remember password</span>
-		    		<button type="submit" class="submit-btn">Login In</button>
-		    	</form>
- 
-		    	<form id="register" class="input-group">
-		    		<input type="text" class="input-field" placeholder="User Id" required>
-		    		<input type="email" class="input-field" placeholder="Email Id" required>
-		    		<input type="text" class="input-field" placeholder="Enter password" required>
-		    		<input type="checkbox" class="check-box"><span>I Agree to The Term & Condition</span>
-		    		<button type="submit" class="submit-btn">Register</button>
-		    	</form>
-		</div>
-	</div>
-	<script type="text/javascript" src="js/functions.js"></script>
-</body>
-</html>
+    <a href="index.html">Home</a> | <a href="products.html">products</a> 
+    | <a href="login.html">login</a>| <a href="orders.html">orders</a>
+    | <a href="register.html">register</a> | <a href="productDetails.html">productDetailById</a>  
+    | <a href="accounts.html">accounts</a> | <a href="categories.html">categories</a>
+    | <a href="customers.html">customers</a> | <a href="deliveries.html">deliveries</a> 
+    | <a href="feedbacks.html">feedbacks</a> | <a href="orderDetails.html">orderDetails</a>
+    | <a href="payments.html">payments</a> | <a href="sellers.html">sellers</a>
+    | <a href="staffs.html">staffs</a> | <a href="transactions.html">transactions</a>
+    | <a href="vendors.html">vendors</a> | <a href="transactions.html">transactions</a>
+    | <a href="transactions.html">transactions</a> | <a href="transactions.html">transactions</a>
+    <hr/>
+    <center> <h3 style="color: red;">Users registration Form</h3> </center>   
+	<center>
+        <div class="container">   
+			<form action="//localhost:11000/api/users" method="post">
+
+            <label for="email">Email : </label><br> 
+            <input type="email" placeholder="Enter User email" id="email" name="email" required> <br> 
+            <label for="password">Password : </label><br>
+            <input type="password" placeholder="Enter Password" id="password" name="password" required><br>
+			<label for="usertype">Password : </label><br>
+            <input type="usertype" placeholder="Enter usertype" id="usertype" name="usertype" required><br>
+			<br/>
+			<input type="submit" value="Submit">
+		</form>
+        </div> 
+	</center> 
+</body>     
+</html> 

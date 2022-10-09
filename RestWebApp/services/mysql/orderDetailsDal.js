@@ -1,82 +1,66 @@
-//database connectivity
-const sql=require('./db');
 
+import mysql from "./mysqldbmgr.js";
+export default class OrderDetailManager {
+  constructor() {}
 
-//get all data from databases table
-  exports.getAll=function(){
-          return new Promise (resolve=>{
-                 let command="select * from orderDetails";
-                 sql.query(command,(err,rows,fields)=>{
-                     if(!err){
-                        resolve(rows);
-                    }
-                     else{
-                         resolve(err);
-                     }
-        })
-    });
-};
-//data get from database table based on perticuler id
-  exports.getById=function(order_det_id){
-          return new Promise (resolve=>{
-                 let command="select * from orderdetails where order_det_id="+order_det_id ;
-                 sql.query(command,(err,rows,fields)=>{
-                     if(!err){
-                        resolve(rows);
-                     }
-                     else{
-                         resolve(err);
-                     }
-        })
-    });
-};
+  insert = (req, res) => {
+    return new Promise((resolve) => {
+      var cmd = `INSERT INTO orderDetails(quantity,price,orderid,productid,createdat,modifiedat) values('${req.body.quantity}',\n"+"
+      '${req.body.price}','${req.body.orderid}','${req.body.productid}','${req.body.createdat}','${req.body.modifiedat}')`;
 
-//insert data into DB
-  exports.insert=function(req){
-         //console.log(req.body);
-         return new Promise (resolve=>{
-                let id=req.body.order_det_id;
-                let oi=req.body.order_id;
-                let qnt=req.body.quantity;
-                let pi=req.body.product_id;
-            
-                let command="INSERT INTO orderDetails (`order_det_id`,`order_id`,`quantity`,`product_id`) VALUES ("+id+",'"+oi+"','"+qnt+"','"+pi+"')";
-                    sql.query(command,(err,rows,fields)=>{
-                        if(!err){
-                           resolve(rows);
-                        }
-                        else{
-                             resolve(err);
-                        }
-        })
-    });
-};
-//data update from database table based on perticuler id
-   exports.update=function(req){
-           return new Promise (resolve=>{
-                  let command='UPDATE orderDetails SET quantity = ? WHERE order_det_id = ?'; 
-                      sql.query(command,[req.body.quantity,req.body.order_det_id],(err,rows,fields)=>{
-                          if(!err){
-                             resolve(rows);
-                            }
-                          else{
-                              resolve(err);
-                            }
-        })
-    });
-};
+      console.log(cmd);
+      mysql.query(cmd, (err, rows, fields) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(rows);
 
-//data remove from database table based on perticuler id
-  exports.remove=function(order_det_id){
-          return new Promise (resolve=>{
-          let command="DELETE from orderDetails where order_det_id="+order_det_id ;
-                 sql.query(command,(err,rows,fields)=>{
-                     if(!err){
-                       resolve(rows);
-                     }
-                     else{
-                         resolve(err);
-                    }
-        })
+          resolve(rows);
+        }
+      });
     });
-};
+  };
+
+  update = (req, res) => {
+    return new Promise((resolve) => {
+      let command = `UPDATE orderDetails SET price="${req.body.price}",quantity="${req.body.quantity}" WHERE id = "${req.params.id}"`;
+      console.log(command);
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+
+  getAll = () => {
+    return new Promise((resolve) => {
+      let command = `SELECT * FROM orderdetails `;
+      console.log(command);
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+
+  getById = (req, res) => {
+    return new Promise((resolve) => {
+      let id = req.params.id;
+      console.log(id)
+      let command = `SELECT * FROM orderDetails WHERE id="${id}"`;
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+
+  delete = (req, res) => {
+    return new Promise((resolve) => {
+      let id = req.params.id;
+      console.log(id)
+      let command = `DELETE FROM users WHERE id="${id}"`;
+      console.log(command);
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+}

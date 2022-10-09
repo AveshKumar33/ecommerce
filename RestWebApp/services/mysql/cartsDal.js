@@ -1,6 +1,6 @@
 
 import mysql from "./mysqldbmgr.js";
-export default class UserManager {
+export default class CartManager {
   constructor() {}
 
   insert = (req, res) => {
@@ -59,25 +59,6 @@ export default class UserManager {
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
-      });
-    });
-  };
-  // Seller
-login = function (req) {
-    return new Promise((resolve) => {
-      let data = req.body;
-      let command = `SELECT email FROM users WHERE email="${data.email}" AND password="${data.password}" AND user_type="${data.user_type}"`;
-      sql.query(command, (err, rows, fields) => {
-        if (err) {
-          console.log("Error:", err);
-        }
-        let allUsersStr = JSON.stringify(rows);
-        var allUsers = JSON.parse(allUsersStr);
-        if (allUsers.length > 0) {
-          resolve(`Welcome ${data.email}`);
-        } else {
-          resolve("Invalid User");
-        }
       });
     });
   };

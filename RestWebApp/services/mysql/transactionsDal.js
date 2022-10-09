@@ -1,11 +1,11 @@
 
 import mysql from "./mysqldbmgr.js";
-export default class UserManager {
+export default class TransactionManager {
   constructor() {}
 
   insert = (req, res) => {
     return new Promise((resolve) => {
-      var cmd = `INSERT INTO users(email,password,usertype) values('${req.body.email}','${req.body.password}','${req.body.usertype}')`;
+      var cmd = `INSERT INTO transactions(fromaccount,toaccount,amount,createdat) values('${req.body.fromaccount}','${req.body.toaccount}','${req.body.amount}',,'${req.body.createdat}')`;
 
       console.log(cmd);
       mysql.query(cmd, (err, rows, fields) => {
@@ -22,7 +22,7 @@ export default class UserManager {
 
   update = (req, res) => {
     return new Promise((resolve) => {
-      let command = `UPDATE users SET password="${req.body.password}" WHERE email = "${req.params.email}"`;
+      let command = `UPDATE transactions SET amount="${req.body.amount}" WHERE id = "${req.params.id}"`;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -32,7 +32,7 @@ export default class UserManager {
 
   getAll = () => {
     return new Promise((resolve) => {
-      let command = `SELECT * FROM users `;
+      let command = `SELECT * FROM transactions `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -44,7 +44,7 @@ export default class UserManager {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `SELECT * FROM users WHERE id="${id}"`;
+      let command = `SELECT * FROM transactions WHERE id="${id}"`;
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
       });
@@ -55,29 +55,10 @@ export default class UserManager {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `DELETE * FROM users WHERE id="${id}"`;
+      let command = `DELETE FROM transactions WHERE id="${id}"`;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
-      });
-    });
-  };
-  // Seller
-login = function (req) {
-    return new Promise((resolve) => {
-      let data = req.body;
-      let command = `SELECT email FROM users WHERE email="${data.email}" AND password="${data.password}" AND user_type="${data.user_type}"`;
-      sql.query(command, (err, rows, fields) => {
-        if (err) {
-          console.log("Error:", err);
-        }
-        let allUsersStr = JSON.stringify(rows);
-        var allUsers = JSON.parse(allUsersStr);
-        if (allUsers.length > 0) {
-          resolve(`Welcome ${data.email}`);
-        } else {
-          resolve("Invalid User");
-        }
       });
     });
   };

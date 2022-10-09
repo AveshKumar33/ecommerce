@@ -1,82 +1,539 @@
-insert into users(first_name,last_name,email,password,contact_number,role) values('ram','singh','ram@gmail.com','ram123','9045832145','customer'),
-                             ('shakti','singh','shakti@gmail.com','shakti123','8965432167','seller'),
-                             ('mudit','raj','mudit@gmail.com','mudit123','9023456781','vendor');
-
-insert into customers(user_id,billing_address,delivery_address) values(1,'kanpur','agra'),(2,'jaipur','jaipur'),(3,'lacknow','mumbai');
-
-insert into Billing_addresses(city,state,pin_code,country,customer_id)
-values('kanpur','UP','203412','india',1),
-('patna','bihar','452341','india',2),
-('mumbai','maharastra','453211','india',3);
-
-insert into Delivery_addresses(city,state,pin_code,country,customer_id)
-values('Agra','UP','233412','india',1),
-('Ara','bihar','452331','india',2),
-('Pune','maharastra','123211','india',3);
-
-insert into Sellers(GSTin,user_id) values('20 %',1),('24 %',2),('27 %',3); insert into Vendors(user_id) values(1),(2),(3);
-
-insert into Products(title,description,unitPrice,quantity,category,seller_id)
-values('iPhone4','best smart phone',50000,50,'smart phone',1),
-('nexon','best smart car',100000,20,'smart car',2),
-('asus','best smart laptop',60000,40,'smart laptop',3);
-
- insert into Orders(order_date,user_id,status) values('2022/4/20',1,'processed'),
-																('2022/2/02',2,'inprogress'),
-																('2022/9/22',3,'approved');  
-insert into Order_details(quantity,order_id,product_id) values('20',1,2),
-																('25',2,1),
-																('16',3,3);
-                                                                
-insert into Payments(payment_date,order_id,amount,payment_mode,transaction_id) values('2022/4/20',1,300.54,'online','debit card'),
-																('2022/2/02',2,400.98,'online','cash on delivery'),
-																('2022/9/22',3,500.56,'offline','debit card');  
-
-===================== DB avesh ===========================================================================================
-insert into customers(userid) values(1),(2),(3),(4),(5);
- insert into users(userid,loginname,password,address) values(1,'mukesh','muk123','indore'),
-																(2,'hareesh','har123','muradabad'),
-																(3,'suresh','sur123','gajiyabad'),
-                                                                (4,'yubraj','yub123','mohali'),
-                                                                (5,'kuldeep','kul123','kanpur');
-insert into orders(orderdate,totalamount,customerid,orderstatus) values('2022-07-23','80000',1,'success'),
-                                                                         ('2022-03-13','70000',2,'initiated'),
-                                                                           ('2022-03-13','70000',3,'approved'),
-                                                                             ('2022-03-11','55000',4,'success'),
-                                                                              ('2022-03-11','22000',5,'process');           
-            
-insert into accounts(accountcteateddate,balance,userid) values('2022-07-23','80000',1),
-                                                                ('2022-03-13','900000',2),
-                                                                  ('2022-03-13','700000',3),
-                                                                   ('2022-03-11','550000',4),
-                                                                    ('2022-03-12','220000',5);   
-                                           
-insert into transactions(date,amount,fromaccountid,toaccountid) values('2022-07-23','8008',6,8),
-                                                                       ('2022-03-13','9009',6,7),
-                                                                        ('2022-03-13','7007',7,8),
-                                                                          ('2022-03-11','5505',8,9),
-                                                                            ('2022-03-12','2202',6,10);                                                                                      
- insert into payments(date,paymentmode,amount,orderid,transactionid) values('2022-07-23','netbanking','808',11,6),
-                                                                             ('2022-03-13','UPI','909',12,7),
-                                                                              ('2022-03-13','debit card','707',13,8),
-                                                                                ('2022-03-11','phone pay','555',14,9),
-                                                                                  ('2022-03-12','pattem','222',15,10); 
-																						 
-																						 
- insert into Products(title,imageurl,unitPrice,stockavaiables,category)
-values('iPhone4','http://best smart phone',50000,50,'smart phone'),
-('nexon','http://best smart car',100000,20,'smart car'),
-('asus','http://best smart laptop',60000,40,'smart laptop'),
-('boat','http://best smart watch',6000,48,'smart watch'),
-('chinny','http://best smart robot',9990000,98,'smart robot'),
-('vikrant','http://best smart laptop',6066000,4,'smart aircraft'),
-('tvs','http://best smart bike',60000,400,'smart bike');                                                                                         
-                          
-insert into Orderdetails(items,orderid,productid) values('20',11,2),
-														('25',12,1),
-														('16',13,3),
-                                                        ('44',14,4),
-                                                        ('116',15,5);
- insert into Vendors(userid) values(4),(5),(6);
-
-insert into deliveries(vendorid,orderid) values(1,11),(2,12),(3,13);
+INSERT INTO users(
+        email,
+        password,
+        usertype
+    )
+values(
+        "shravan@gmail.com",
+        "sp@123",
+        "customer"
+    ),(
+        "ganesh@gmail.com",
+        "gp@123",
+        "customer"
+    ),(
+        "a@gmail.com",
+        "a@123",
+        "seller"
+    ),(
+        "b@gmail.com",
+        "b@123",
+        "seller"
+    ),(
+        "kailash@gmail.com",
+        "kp@123",
+        "staff"
+    ),(
+        "suresh@gmail.com",
+        "sk@123",
+        "staff"
+    ),(
+        "delhivery@delhivery.com",
+        "dl@123",
+        "vendor"
+    ),(
+        "bluedart@gmail.com",
+        "bd@123",
+        "vendor"
+    );
+INSERT INTO customers(
+        userid,
+        firstname,
+        lastname,
+        contactno,
+        location,
+        createdat,
+        modifiedat
+    )
+values(
+        1,
+        "Avesh",
+        "Kumar",
+        "7726378278",
+        "kanpur, UP",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        2,
+        "Ganesh",
+        "Patel",
+        "7726378287",
+        "Sirohi, Rajasthan",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        3,
+        "rameshesh",
+        "singh",
+        "7726379887",
+        "muradabad,UP",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        4,
+        "veer",
+        "singh",
+        "9926378287",
+        "Sirohi, Rajasthan",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        5,
+        "shyam",
+        "sunder",
+        "8826378287",
+        "mathura,up",
+        "2022-02-10",
+        "2021-09-26"
+    );
+    INSERT INTO sellers(
+        userid,
+        name,
+        location,
+        contactno,
+        createdat,
+        modifiedat
+    )
+VALUES(
+        1,
+        "B Electronics",
+        "Punjab",
+        "7643223445",
+        "2022-02-10",
+        "2021-09-26"
+    ),
+    (
+        2,
+        "stationary",
+        "UP",
+        "7643223431",
+        "2022-02-10",
+        "2021-09-26"
+    ),
+    (
+        3,
+        "sports",
+        "delhi",
+        "7643223419",
+        "2022-02-10",
+        "2021-09-26"
+    ),
+    (
+        4,
+        "fruits",
+        "shimla",
+        "7643223235",
+        "2022-02-10",
+        "2021-09-26"
+    ),
+    (
+        5,
+        "bookseller",
+        "mumbai",
+        "7643227835",
+        "2022-02-10",
+        "2021-09-26"
+    );
+    INSERT INTO staffs(
+        userid,
+        firstname,
+        lastname,
+        contactno,
+        empid,
+        createdat,
+        modifiedat
+    )
+values(
+        5,
+        "Suresh",
+        "Solanki",
+        "7643223435",
+        101,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        1,
+        "Pradeep",
+        "suhag",
+        "7233223535",
+        102,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        4,
+        "Pradeep",
+        "Solanki",
+        "7643223535",
+        103,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        3,
+        "shyam",
+        "singh",
+        "7643224512",
+        104,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        2,
+        "shaki",
+        "Singh",
+        "7643213335",
+        105,
+        "2022-02-10",
+        "2021-09-26"
+    );
+ INSERT INTO vendors(
+        userid,
+        name,
+        contactno,
+        createdat,
+        modifiedat
+    )
+values(
+        5,
+        "BlueDart",
+        "5435433231",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        3,
+        "Delhivery",
+        "5435433236",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        4,
+        "vmart",
+        "5435433298",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        1,
+        "rocky",
+        "1335439831",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        2,
+        "finnland",
+        "5435433276",
+        "2022-02-10",
+        "2021-09-26"
+    );
+    INSERT INTO categories(name, createdat, modifiedat)
+VALUES ("stationary", "2022-02-10", "2021-09-26"),
+ ("Electronincs", "2022-02-10", "2021-09-26"),
+ ("fruits", "2022-02-10", "2021-09-26"),
+  ("sports", "2022-02-10", "2021-09-26"),
+   ("bookseller", "2022-02-10", "2021-09-26");
+INSERT INTO products(
+        title,
+        description,
+        imageurl,
+        quantity,
+        price,
+        categoryid,
+        sellerid,
+        createdat,
+        modifiedat
+    )
+VALUES(
+        "Samsung Galaxy S20",
+        "Smart Phone",
+        "https://m.media-amazon.com/images/I/81QVLzeVckL._SL1500_.jpg",
+        50,
+        29999.200,
+        2,
+        3,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        "Fossil Gen 5",
+        "Touchscreen Men's Smartwatch with Speak Notifications",
+        "https://m.media-amazon.com/images/I/71qNX0wixBL._UL1500_.jpg",
+        20,
+        18396,
+        2,
+        1,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        "laptop",
+        "Touchscreen Men's SmarlaptopSmartlaptop Notifications",
+        "https://www.pexels.com/photo/photo-of-laptop-near-plant-1006293/",
+        20,
+        108396,
+        2,
+        3,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        "apple",
+        "kashmiri apple",
+        "https://en.wikipedia.org/wiki/Apple#/media/File:Pink_lady_and_cross_section.jpg",
+        200,
+        30,
+        3,
+        3,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        "airthant",
+        "Best books for learning",
+        "https://www.flipkart.com/arihant-english-grammar-composition-competitive-exams/p/itm517a27e1dee4c",
+        20,
+        108396,
+        1,
+        3,
+        "2022-02-10",
+        "2021-09-26"
+    );
+INSERT INTO orders(status, customerid, createdat, modifiedat)
+values(
+        "Delivered",
+        6,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        "In Transit",
+        8,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        "process",
+        7,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        "In Transit",
+        9,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        "approved",
+        10,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        "In Transit",
+        8,
+        "2022-02-10",
+        "2021-09-26"
+    );
+    INSERT INTO orderDetails(
+        quantity,
+        price,
+        orderid,
+        productid,
+        createdat,
+        modifiedat
+    )
+VALUES(
+        1,
+        29999,
+        12,
+        4,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        2,
+        18396,
+        14,
+        3,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        2,
+        18396,
+        13,
+        2,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        2,
+        18396,
+        16,
+        2,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        1,
+        18396,
+        14,
+        1,
+        "2022-02-10",
+        "2021-09-26"
+    );
+INSERT INTO payments(
+        totalamount,
+        discountpercentage,
+        payableamount,
+        orderid,
+        modeofpayment,
+        createdat,
+        modifiedat
+    )
+values(
+        29999,
+        10,
+        26999.1,
+        15,
+        "netbanking",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        18396,
+        5,
+        17476.2,
+        16,
+        "UPI",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        183739,
+	9,
+        174790.2,
+        12,
+        "netbanking",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        13396,
+        5,
+        11176.2,
+        13,
+        "UPI",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        19996,
+        5,
+        17996.2,
+        14,
+        "debitcard",
+        "2022-02-10",
+        "2021-09-26"
+    );
+INSERT INTO feedbacks(
+        imageurl,
+        productid,
+        customerid,
+        description,
+        createdat,
+        modifiedat
+    )
+values(
+        "https://m.media-amazon.com/images/I/81QVLzeVckL._SL1500_.jpg",
+        3,
+        7,
+        "Nice smart phone",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        "https://m.media-amazon.com/images/I/71qNX0wixBL._UL1500_.jpg",
+        2,
+        6,
+        "Nice smart wacth",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        "https://en.wikipedia.org/wiki/Apple#/media/File:Pink_lady_and_cross_section.jpg",
+        5,
+        9,
+        "kashmiri Apple",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        "https://m.media-amazon.com/images/I/71qNX0wixBL._UL1500_.jpg",
+        2,
+        6,
+        "Nice smart wacth",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        "https://www.flipkart.com/arihant-english-grammar-composition-competitive-exams/p/itm517a27e1dee4c",
+        4,
+        8,
+        "best book for learning",
+        "2022-02-10",
+        "2021-09-26"
+    );
+    INSERT INTO deliveries(
+        orderid,
+        vendorid,
+        location,
+        createdat,
+        modifiedat
+    )
+values(
+        12,
+        6,
+        "Jaipur",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        13,
+        8,
+        "Sirohi",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        15,
+        7,
+        "kanpur",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        16,
+        10,
+        "agra",
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        15,
+        9,
+        "varanasi",
+        "2022-02-10",
+        "2021-09-26"
+    );
+    INSERT INTO accounts(
+        accountnumber,
+        userid,
+        balance,
+        createdat,
+        modifiedat
+    )
+values(
+        "45615156165",
+        1,
+        100000,
+        "2022-02-10",
+        "2021-09-26"
+ ),
+ (        "45643156165",
+        2,
+        100000,
+        "2022-02-10",
+        "2021-09-26"
+ ),
+    (
+        "45615776165",
+        3,
+        200000,
+        "2022-02-10",
+        "2021-09-26"
+    ),(
+        "45615166165",
+        4,
+        50000,
+        "2022-02-10",
+        "2021-09-26"
+    ),
+    (   "45615165565",
+        5,
+        50000,
+        "2022-02-10",
+        "2021-09-26"
+    );   

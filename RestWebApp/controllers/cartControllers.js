@@ -1,5 +1,5 @@
 
-export default class UserController {
+export default class CartController {
    //constructor Dependency Injection
    constructor(mgr) {
      this.dal = mgr;

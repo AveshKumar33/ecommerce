@@ -1,85 +1,65 @@
 
-//work progress
-//database connectivity
-const sql=require('../../models/db');
+import mysql from "./mysqldbmgr.js";
+export default class CategoryManager {
+  constructor() {}
 
+  insert = (req, res) => {
+    return new Promise((resolve) => {
+      var cmd = `INSERT INTO categories(name,createdat,modifiedat) values('${req.body.name}','${req.body.createdat}','${req.body.modifiedat}')`;
 
-//get all data from databases table
-  exports.getAll=function(){
-          return new Promise (resolve=>{
-                 let command="select * from customers";
-                 sql.query(command,(err,rows,fields)=>{
-                     if(!err){
-                        resolve(rows);
-                    }
-                     else{
-                         resolve(err);
-                     }
-        })
-    });
-};
-//data get from database table based on perticuler id
-  exports.getById=function(customer_id){
-          return new Promise (resolve=>{
-                 let command="select * from customers where customer_id="+customer_id ;
-                 sql.query(command,(err,rows,fields)=>{
-                     if(!err){
-                        resolve(rows);
-                     }
-                     else{
-                         resolve(err);
-                     }
-        })
-    });
-};
+      console.log(cmd);
+      mysql.query(cmd, (err, rows, fields) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(rows);
 
-//insert data into DB
-  exports.insert=function(req){
-         //console.log(req.body);
-         return new Promise (resolve=>{
-                let id=req.body.customer_id;
-                let da=req.body.delivery_address;
-                let ba=req.body.billing_address;
-                let ui=req.body.user_id;
-                let command="INSERT INTO customers (`customer_id`,`billing_address`,`delivery_address`,`user_id`) VALUES ("+id+",'"+ba+"','"+da+"','"+ui+"')";
-                    sql.query(command,(err,rows,fields)=>{
-                        if(!err){
-                           resolve(rows);
-                        }
-                        else{
-                             resolve(err);
-                        }
-        })
+          resolve(rows);
+        }
+      });
     });
-};
-//data update from database table based on perticuler id
-   exports.update=function(req){
-           //console.log(req.body);
-           return new Promise (resolve=>{
-          // console.log(req.body.fname)
-                  let command='UPDATE customers SET delivery_address = ? WHERE customer_id = ?'; 
-                      sql.query(command,[req.body.delivery_address,req.body.customer_id],(err,rows,fields)=>{
-                          if(!err){
-                             resolve(rows);
-                            }
-                          else{
-                              resolve(err);
-                            }
-        })
-    });
-};
+  };
 
-//data remove from database table based on perticuler id
-  exports.remove=function(customer_id){
-          return new Promise (resolve=>{
-          let command="DELETE from customers where customer_id="+customer_id ;
-                 sql.query(command,(err,rows,fields)=>{
-                     if(!err){
-                       resolve(rows);
-                     }
-                     else{
-                         resolve(err);
-                    }
-        })
+  update = (req, res) => {
+    return new Promise((resolve) => {
+      let command = `UPDATE categories SET name="${req.body.name}" WHERE id = "${req.params.id}"`;
+      console.log(command);
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
     });
-};
+  };
+
+  getAll = () => {
+    return new Promise((resolve) => {
+      let command = `SELECT * FROM categories `;
+      console.log(command);
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+
+  getById = (req, res) => {
+    return new Promise((resolve) => {
+      let id = req.params.id;
+      console.log(id)
+      let command = `SELECT * FROM categories WHERE id="${id}"`;
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+
+  delete = (req, res) => {
+    return new Promise((resolve) => {
+      let id = req.params.id;
+      console.log(id)
+      let command = `DELETE FROM categories WHERE id="${id}"`;
+      console.log(command);
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+}

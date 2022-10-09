@@ -1,11 +1,9 @@
 export default class User{
-    constructor(id,name,email,password,contactnumber,city){
+    constructor(id,email,password,usertype){
         this.id=id;
-        this.name=name;
         this.email=email;
         this.password=password;
-        this.contactnumber=contactnumber;
-        this.city=city;
+        this.usertype=usertype;
     }
     // display(){
     //     console.log('user id = '+this.id);

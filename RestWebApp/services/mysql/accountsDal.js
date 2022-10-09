@@ -1,82 +1,65 @@
-//database connectivity
-const sql=require('./db');
 
+import mysql from "./mysqldbmgr.js";
+export default class AccountManager {
+  constructor() {}
 
-//get all data from databases table
-  exports.getAll=function(){
-          return new Promise (resolve=>{
-                 let command="select * from accounts";
-                 sql.query(command,(err,rows,fields)=>{
-                     if(!err){
-                        resolve(rows);
-                    }
-                     else{
-                         resolve(err);
-                     }
-        })
-    });
-};
-//data get from database table based on perticuler id
-  exports.getById=function(id){
-          return new Promise (resolve=>{
-                 let command="select * from accounts where accountid="+id ;
-                 sql.query(command,(err,rows,fields)=>{
-                     if(!err){
-                        resolve(rows);
-                     }
-                     else{
-                         resolve(err);
-                     }
-        })
-    });
-};
+  insert = (req, res) => {
+    return new Promise((resolve) => {
+      var cmd = `INSERT INTO accounts(accountnumber,balance,userid,createdat,modifiedat) values('${req.body.accountnumber}','${req.body.balance}','${req.body.userid}','${req.body.createdat}','${req.body.modifiedat}')`;
 
-//insert data into DB
-  exports.insert=function(req){
-         //console.log(req.body);
-         return new Promise (resolve=>{
-                let id=req.body.accountid;
-                let acd=req.body.accountcteateddate;
-                let bal=req.body.balance;
-                let ui=req.body.userid;
-    
-                let command="INSERT accounts (`accountid`,`accountcteateddate`,`balance`,`userid`) VALUES ("+id+",'"+acd+"','"+bal+"','"+ui+"')";
-                    sql.query(command,(err,rows,fields)=>{
-                        if(!err){
-                           resolve(rows);
-                        }
-                        else{
-                             resolve(err);
-                        }
-        })
-    });
-};
-//data update from database table based on perticuler id
-   exports.update=function(req){
-           return new Promise (resolve=>{
-                  let command='UPDATE accounts SET balance = ? WHERE accountid = ?'; 
-                      sql.query(command,[req.body.balance,req.body.accountid],(err,rows,fields)=>{
-                          if(!err){
-                             resolve(rows);
-                            }
-                          else{
-                              resolve(err);
-                            }
-        })
-    });
-};
+      console.log(cmd);
+      mysql.query(cmd, (err, rows, fields) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(rows);
 
-//data remove from database table based on perticuler id
-  exports.remove=function(id){
-          return new Promise (resolve=>{
-          let command="DELETE fromaccounts where accountid="+id ;
-                 sql.query(command,(err,rows,fields)=>{
-                     if(!err){
-                       resolve(rows);
-                     }
-                     else{
-                         resolve(err);
-                    }
-        })
+          resolve(rows);
+        }
+      });
     });
-};
+  };
+
+  update = (req, res) => {
+    return new Promise((resolve) => {
+      let command = `UPDATE accounts SET balance="${req.body.balance}" WHERE accountnumber = "${req.params.accountnumber}"`;
+      console.log(command);
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+
+  getAll = () => {
+    return new Promise((resolve) => {
+      let command = `SELECT * FROM accounts `;
+      console.log(command);
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+
+  getById = (req, res) => {
+    return new Promise((resolve) => {
+      let id = req.params.id;
+      console.log(id)
+      let command = `SELECT * FROM accounts WHERE id="${id}"`;
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+
+  delete = (req, res) => {
+    return new Promise((resolve) => {
+      let id = req.params.id;
+      console.log(id)
+      let command = `DELETE FROM accounts WHERE id="${id}"`;
+      console.log(command);
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+}

@@ -1,5 +1,5 @@
 
-export default class UserController {
+export default class FeedbackController {
     //constructor Dependency Injection
     constructor(mgr) {
       this.dal = mgr;

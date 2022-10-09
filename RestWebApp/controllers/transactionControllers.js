@@ -1,5 +1,5 @@
 
-export default class UserController {
+export default class TransactionController {
     //constructor Dependency Injection
     constructor(mgr) {
       this.dal = mgr;

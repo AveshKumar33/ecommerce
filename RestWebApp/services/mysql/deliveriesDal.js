@@ -1,81 +1,66 @@
-//database connectivity
-const sql=require('./db');
 
+import mysql from "./mysqldbmgr.js";
+export default class DeliveryManager {
+  constructor() {}
 
-//get all data from databases table
-  exports.getAll=function(){
-          return new Promise (resolve=>{
-                 let command="select * from deliveries";
-                 sql.query(command,(err,rows,fields)=>{
-                     if(!err){
-                        resolve(rows);
-                    }
-                     else{
-                         resolve(err);
-                     }
-        })
-    });
-};
-//data get from database table based on perticuler id
-  exports.getById=function(id){
-          return new Promise (resolve=>{
-                 let command="select * from deliveries where deliveryid="+id ;
-                 sql.query(command,(err,rows,fields)=>{
-                     if(!err){
-                        resolve(rows);
-                     }
-                     else{
-                         resolve(err);
-                     }
-        })
-    });
-};
+  insert = (req, res) => {
+    return new Promise((resolve) => {
+      var cmd = `INSERT INTO deliveries(orderid,vendorid,location,createdat,modifiedat) values('${req.body.orderid}','${req.body.vendorid}',\n"+"
+      '${req.body.location}','${req.body.modifiedat}','${req.body.createdat}')`;
 
-//insert data into DB
-  exports.insert=function(req){
-         //console.log(req.body);
-         return new Promise (resolve=>{
-                let id=req.body.deliveryid;
-                let vi=req.body.vendorid;
-                let oi=req.body.orderid;
-    
-                let command="INSERT deliveries (`deliveryid`,`vendorid`,`orderid`) VALUES ("+id+",'"+vi+"','"+oi+"')";
-                    sql.query(command,(err,rows,fields)=>{
-                        if(!err){
-                           resolve(rows);
-                        }
-                        else{
-                             resolve(err);
-                        }
-        })
-    });
-};
-//data update from database table based on perticuler id
-   exports.update=function(req){
-           return new Promise (resolve=>{
-                  let command='UPDATE deliveries SET vendorid = ? WHERE deliveryid = ?'; 
-                      sql.query(command,[req.body.vendorid,req.body.deliveryid],(err,rows,fields)=>{
-                          if(!err){
-                             resolve(rows);
-                            }
-                          else{
-                              resolve(err);
-                            }
-        })
-    });
-};
+      console.log(cmd);
+      mysql.query(cmd, (err, rows, fields) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(rows);
 
-//data remove from database table based on perticuler id
-  exports.remove=function(id){
-          return new Promise (resolve=>{
-          let command="DELETE from deliveries where deliveryid="+id ;
-                 sql.query(command,(err,rows,fields)=>{
-                     if(!err){
-                       resolve(rows);
-                     }
-                     else{
-                         resolve(err);
-                    }
-        })
+          resolve(rows);
+        }
+      });
     });
-};
+  };
+
+  update = (req, res) => {
+    return new Promise((resolve) => {
+      let command = `UPDATE deliveries SET vendorid="${req.body.vendorid}",location="${req.body.location}" WHERE id = "${req.params.id}"`;
+      console.log(command);
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+
+  getAll = () => {
+    return new Promise((resolve) => {
+      let command = `SELECT * FROM deliveries `;
+      console.log(command);
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+
+  getById = (req, res) => {
+    return new Promise((resolve) => {
+      let id = req.params.id;
+      console.log(id)
+      let command = `SELECT * FROM deliveries WHERE id="${id}"`;
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+
+  delete = (req, res) => {
+    return new Promise((resolve) => {
+      let id = req.params.id;
+      console.log(id)
+      let command = `DELETE  FROM deliveries WHERE id="${id}"`;
+      console.log(command);
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+}

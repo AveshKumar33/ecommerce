@@ -1,81 +1,66 @@
-//database connectivity
-const sql=require('./db');
 
+import mysql from "./mysqldbmgr.js";
+export default class VendorManager {
+  constructor() {}
 
-//get all data from databases table
-  exports.getAll=function(){
-          return new Promise (resolve=>{
-                 let command="select * from vendors";
-                 sql.query(command,(err,rows,fields)=>{
-                     if(!err){
-                        resolve(rows);
-                    }
-                     else{
-                         resolve(err);
-                     }
-        })
-    });
-};
-//data get from database table based on perticuler id
-  exports.getById=function(id){
-          return new Promise (resolve=>{
-                 let command="select * from vendors where vendor_id="+id ;
-                 sql.query(command,(err,rows,fields)=>{
-                     if(!err){
-                        resolve(rows);
-                     }
-                     else{
-                         resolve(err);
-                     }
-        })
-    });
-};
+  insert = (req, res) => {
+    return new Promise((resolve) => {
+      var cmd = `INSERT INTO vendors(userid,name,contactno,createdat,modifiedat) values('${req.body.userid}','${req.body.name}','${req.body.contactno}',\n"+"
+      ,'${req.body.createdat}','${req.body.modifiedat}')`;
 
-//insert data into DB
-  exports.insert=function(req){
-         //console.log(req.body);
-         return new Promise (resolve=>{
-                let vi=req.body.vendor_id;
-        
-                let ui=req.body.user_id;
-             
-                let command="INSERT INTO vendors (`vendor_id`,`user_id`) VALUES ('"+vi+"','"+ui+"')";
-                    sql.query(command,(err,rows,fields)=>{
-                        if(!err){
-                           resolve(rows);
-                        }
-                        else{
-                             resolve(err); 
-                        }
-        })
-    });
-};
-//data update from database table based on perticuler id
-   exports.update=function(req){
-           return new Promise (resolve=>{
-                  let command='UPDATE vendors SET user_id = ? WHERE vendor_id = ?'; 
-                      sql.query(command,[req.body.vendor_id,req.body.user_id],(err,rows,fields)=>{
-                          if(!err){
-                             resolve(rows);
-                            }
-                          else{
-                              resolve(err);
-                            }
-        })
-    });
-};
+      console.log(cmd);
+      mysql.query(cmd, (err, rows, fields) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(rows);
 
-//data remove from database table based on perticuler id
-  exports.remove=function(id){
-          return new Promise (resolve=>{
-          let command="DELETE from vendors where vendor_id="+id ;
-                 sql.query(command,(err,rows,fields)=>{
-                     if(!err){
-                       resolve(rows);
-                     }
-                     else{
-                         resolve(err);
-                    }
-        })
+          resolve(rows);
+        }
+      });
     });
-};
+  };
+
+  update = (req, res) => {
+    return new Promise((resolve) => {
+      let command = `UPDATE vendors SET contactno="${req.body.contactno}" WHERE id = "${req.params.id}"`;
+      console.log(command);
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+
+  getAll = () => {
+    return new Promise((resolve) => {
+      let command = `SELECT * FROM vendors `;
+      console.log(command);
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+
+  getById = (req, res) => {
+    return new Promise((resolve) => {
+      let id = req.params.id;
+      console.log(id)
+      let command = `SELECT * FROM vendors WHERE id="${id}"`;
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+
+  delete = (req, res) => {
+    return new Promise((resolve) => {
+      let id = req.params.id;
+      console.log(id)
+      let command = `DELETE FROM vendors WHERE id="${id}"`;
+      console.log(command);
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+}

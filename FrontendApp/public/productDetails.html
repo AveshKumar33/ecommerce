@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Home Page</title>
+        <title>Product Catalog</title>
+        <script src="/scripts/jquery-3.2.1.min.js"></script>
+        <script src="/scripts/app.js"></script>
     </head>
     <body>
         <h1>Transflower Store</h1>
@@ -18,9 +20,17 @@
         | <a href="transactions.html">transactions</a> | <a href="transactions.html">transactions</a>
         <hr/>
         <div>
-            <img src="./images/Transflower.jpg" width="100" height="100"/>
-
-            <h3>ECommerce Web Site for sale beautiful flowers....</h3>
+             <h2>Todays products Details</h2>
+             <button onclick="fetchProductDetails()">Get Product details by id</button>
+             <ul id="productList">
+                
+             </ul>
+             
+             <p id="id"></p>
+             <p id="title"></p>
+             <p id="description"></p>
+             <p id="unitPrice"></p>
+             <p id="quantity"></p>
         </div>
     </body>
 </html>

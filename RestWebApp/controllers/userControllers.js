@@ -36,5 +36,10 @@ export default class UserController {
       console.log(result);
       res.send(result);
     };
+    login = async (req, res) => {
+      let result = await this.dal.login(req);
+      console.log(result);
+      res.send(result);
+    };
   }
   
