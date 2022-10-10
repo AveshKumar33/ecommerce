@@ -9,21 +9,21 @@ var fetchProducts = () => {
 
     $.ajax({
         dataType: "json",
-        type:"GET",
+        type: "GET",
         url: url,
         success: (data) => {
-           // console.log(data);
+            // console.log(data);
             let Data = JSON.stringify(data);
             // let para1 = document.getElementById("para");
             // para1.innerHTML = strData;
 
             //DOM tree Manipulation Code at Client Side
-        
-             for(var i=0;i<data.length;i++){
-                 const row = document.createElement("tr");
-                 row.innerHTML =`
+
+            for (var i = 0; i < data.length; i++) {
+                const row = document.createElement("tr");
+                row.innerHTML = `
                  <td> ${data[i].id} </td>
-                 <td> ${data[i].title } </td>
+                 <td> ${data[i].title} </td>
                  <td> ${data[i].description} </td>
                  <td> ${data[i].imageurl} </td>
                  <td> ${data[i].quantity} </td>
@@ -33,194 +33,194 @@ var fetchProducts = () => {
                  <td> ${data[i].createdat} </td>
                  <td> ${data[i].modifiedat} </td>
                  <td> <button type="button" onclick="addToCart(${data[i]})">ADD TO CART!</button></td>`;
-                 document.getElementById("cart").appendChild(row);
-                 fetchProducts();
-                
-                 
-             }  
+                document.getElementById("cart").appendChild(row);
+                fetchProducts();
+
+
+            }
         }
     });
 }
 
 var addToCart = (i) => {
     console.log(i);
-    let cart=new Array();
-    cart=JSON.parse(localStorage.getItem("products"))
+    let cart = new Array();
+    cart = JSON.parse(localStorage.getItem("products"))
     cart.push(i);
-    localStorage.setItem('products',JSON.stringify(cart));
+    localStorage.setItem('products', JSON.stringify(cart));
 }
-    var fetchAccounts = () => {
-        let url = "http://localhost:11000/api/accounts";
-    
-    
-        $.ajax({
-            dataType: "json",
-            type:"GET",
-            url: url,
-            success: (data) => {
-                console.log(data);
-                let Data = JSON.stringify(data);
-                let productList=document.getElementById("accountsList");
-                 for(var i=0;i<data.length;i++){
-                     const node = document.createElement("li");
-                     const textnode = document.createTextNode(data[i].id + " , " +data[i].accountnumber + " , " +data[i].balance 
-                     + " , " +data[i].userid + " , " +data[i].createdat + " , " +data[i].modifiedat );
-                     node.appendChild(textnode);
-                     productList.appendChild(node);
-                 }  
+var fetchAccounts = () => {
+    let url = "http://localhost:11000/api/accounts";
+
+
+    $.ajax({
+        dataType: "json",
+        type: "GET",
+        url: url,
+        success: (data) => {
+            console.log(data);
+            let Data = JSON.stringify(data);
+            let productList = document.getElementById("accountsList");
+            for (var i = 0; i < data.length; i++) {
+                const node = document.createElement("li");
+                const textnode = document.createTextNode(data[i].id + " , " + data[i].accountnumber + " , " + data[i].balance
+                    + " , " + data[i].userid + " , " + data[i].createdat + " , " + data[i].modifiedat);
+                node.appendChild(textnode);
+                productList.appendChild(node);
             }
-        });
-} 
+        }
+    });
+}
 var fetchCategories = () => {
     let url = "http://localhost:11000/api/categories";
 
 
     $.ajax({
         dataType: "json",
-        type:"GET",
+        type: "GET",
         url: url,
         success: (data) => {
             console.log(data);
             let Data = JSON.stringify(data);
-            let productList=document.getElementById("categoriesList");
-             for(var i=0;i<data.length;i++){
-                 const node = document.createElement("li");
-                 const textnode = document.createTextNode(data[i].id + " , " +data[i].name  + " , " +data[i].createdat + " , " +data[i].modifiedat );
-                 node.appendChild(textnode);
-                 productList.appendChild(node);
-             }  
+            let productList = document.getElementById("categoriesList");
+            for (var i = 0; i < data.length; i++) {
+                const node = document.createElement("li");
+                const textnode = document.createTextNode(data[i].id + " , " + data[i].name + " , " + data[i].createdat + " , " + data[i].modifiedat);
+                node.appendChild(textnode);
+                productList.appendChild(node);
+            }
         }
     });
-} 
+}
 var fetchCustomers = () => {
     let url = "http://localhost:11000/api/customers";
 
 
     $.ajax({
         dataType: "json",
-        type:"GET",
+        type: "GET",
         url: url,
         success: (data) => {
             console.log(data);
             let Data = JSON.stringify(data);
-            let productList=document.getElementById("customersList");
-             for(var i=0;i<data.length;i++){
-                 const node = document.createElement("li");
-                 const textnode = document.createTextNode(data[i].id+ " , " +data[i].userid + " , " +data[i].firstname + " , " +data[i].lastname 
-                 + " , " +data[i].contactno + " , " +data[i].location + " , " +data[i].createdat+ " , " +data[i].modifiedat );
-                 node.appendChild(textnode);
-                 productList.appendChild(node);
-             }  
+            let productList = document.getElementById("customersList");
+            for (var i = 0; i < data.length; i++) {
+                const node = document.createElement("li");
+                const textnode = document.createTextNode(data[i].id + " , " + data[i].userid + " , " + data[i].firstname + " , " + data[i].lastname
+                    + " , " + data[i].contactno + " , " + data[i].location + " , " + data[i].createdat + " , " + data[i].modifiedat);
+                node.appendChild(textnode);
+                productList.appendChild(node);
+            }
         }
     });
-} 
+}
 var fetchDeliveries = () => {
     let url = "http://localhost:11000/api/deliveries";
 
 
     $.ajax({
         dataType: "json",
-        type:"GET",
+        type: "GET",
         url: url,
         success: (data) => {
             console.log(data);
             let Data = JSON.stringify(data);
-            let productList=document.getElementById("deliveriesList");
-             for(var i=0;i<data.length;i++){
-                 const node = document.createElement("li");
-                 const textnode = document.createTextNode(data[i].id + " , " +data[i].orderid + " , " +data[i].vendorid 
-                 + " , " +data[i].location + " , " +data[i].createdat + " , " +data[i].modifiedat );
-                 node.appendChild(textnode);
-                 productList.appendChild(node);
-             }  
+            let productList = document.getElementById("deliveriesList");
+            for (var i = 0; i < data.length; i++) {
+                const node = document.createElement("li");
+                const textnode = document.createTextNode(data[i].id + " , " + data[i].orderid + " , " + data[i].vendorid
+                    + " , " + data[i].location + " , " + data[i].createdat + " , " + data[i].modifiedat);
+                node.appendChild(textnode);
+                productList.appendChild(node);
+            }
         }
     });
-} 
+}
 var fetchFeedbacks = () => {
     let url = "http://localhost:11000/api/feedbacks";
 
 
     $.ajax({
         dataType: "json",
-        type:"GET",
+        type: "GET",
         url: url,
         success: (data) => {
             console.log(data);
             let Data = JSON.stringify(data);
-            let productList=document.getElementById("feedbacksList");
-             for(var i=0;i<data.length;i++){
-                 const node = document.createElement("li");
-                 const textnode = document.createTextNode(data[i].id + " , " +data[i].imageurl + " , " +data[i].productid 
-                 + " , " +data[i].customerid+ " , " +data[i].description + " , " +data[i].createdat + " , " +data[i].modifiedat );
-                 node.appendChild(textnode);
-                 productList.appendChild(node);
-             }  
+            let productList = document.getElementById("feedbacksList");
+            for (var i = 0; i < data.length; i++) {
+                const node = document.createElement("li");
+                const textnode = document.createTextNode(data[i].id + " , " + data[i].imageurl + " , " + data[i].productid
+                    + " , " + data[i].customerid + " , " + data[i].description + " , " + data[i].createdat + " , " + data[i].modifiedat);
+                node.appendChild(textnode);
+                productList.appendChild(node);
+            }
         }
     });
-} 
+}
 var fetchOrderDetails = () => {
     let url = "http://localhost:11000/api/orderDetails";
 
 
     $.ajax({
         dataType: "json",
-        type:"GET",
+        type: "GET",
         url: url,
         success: (data) => {
             console.log(data);
             let Data = JSON.stringify(data);
-            let productList=document.getElementById("orderDetailsList");
-             for(var i=0;i<data.length;i++){
-                 const node = document.createElement("li");
-                 const textnode = document.createTextNode(data[i].id + " , " +data[i].quantity + " , " +data[i].price 
-                 + " , " +data[i].orderid+ " , " +data[i].productid + " , " +data[i].createdat + " , " +data[i].modifiedat );
-                 node.appendChild(textnode);
-                 productList.appendChild(node);
-             }  
+            let productList = document.getElementById("orderDetailsList");
+            for (var i = 0; i < data.length; i++) {
+                const node = document.createElement("li");
+                const textnode = document.createTextNode(data[i].id + " , " + data[i].quantity + " , " + data[i].price
+                    + " , " + data[i].orderid + " , " + data[i].productid + " , " + data[i].createdat + " , " + data[i].modifiedat);
+                node.appendChild(textnode);
+                productList.appendChild(node);
+            }
         }
     });
-} 
+}
 var fetchOrders = () => {
     let url = "http://localhost:11000/api/orders";
 
 
     $.ajax({
         dataType: "json",
-        type:"GET",
+        type: "GET",
         url: url,
         success: (data) => {
             console.log(data);
             let Data = JSON.stringify(data);
-            let productList=document.getElementById("ordersList");
-             for(var i=0;i<data.length;i++){
-                 const node = document.createElement("li");
-                 const textnode = document.createTextNode(data[i].id + " , " +data[i].status + " , " +data[i].customerid 
-                 + " , " +data[i].createdat + " , " +data[i].modifiedat );
-                 node.appendChild(textnode);
-                 productList.appendChild(node);
-             }  
+            let productList = document.getElementById("ordersList");
+            for (var i = 0; i < data.length; i++) {
+                const node = document.createElement("li");
+                const textnode = document.createTextNode(data[i].id + " , " + data[i].status + " , " + data[i].customerid
+                    + " , " + data[i].createdat + " , " + data[i].modifiedat);
+                node.appendChild(textnode);
+                productList.appendChild(node);
+            }
         }
     });
-} 
+}
 var fetchPayments = () => {
     let url = "http://localhost:11000/api/payments";
 
 
     $.ajax({
         dataType: "json",
-        type:"GET",
+        type: "GET",
         url: url,
         success: (data) => {
             console.log(data);
             let Data = JSON.stringify(data);
-            let productList=document.getElementById("paymentsList");
-             for(var i=0;i<data.length;i++){
-                 const node = document.createElement("li");
-                 const textnode = document.createTextNode(data[i].id + " , " +data[i].totalamount + " , " +data[i].discountpercentage 
-                 + " , " +data[i].payableamount + " , " +data[i].orderid + " , " +data[i].modeofpayment + " , " +data[i].createdat + " , " +data[i].modifiedat );
-                 node.appendChild(textnode);
-                 productList.appendChild(node);
-             }  
+            let productList = document.getElementById("paymentsList");
+            for (var i = 0; i < data.length; i++) {
+                const node = document.createElement("li");
+                const textnode = document.createTextNode(data[i].id + " , " + data[i].totalamount + " , " + data[i].discountpercentage
+                    + " , " + data[i].payableamount + " , " + data[i].orderid + " , " + data[i].modeofpayment + " , " + data[i].createdat + " , " + data[i].modifiedat);
+                node.appendChild(textnode);
+                productList.appendChild(node);
+            }
         }
     });
 }
@@ -230,85 +230,85 @@ var fetchSellers = () => {
 
     $.ajax({
         dataType: "json",
-        type:"GET",
+        type: "GET",
         url: url,
         success: (data) => {
             console.log(data);
             let Data = JSON.stringify(data);
-            let productList=document.getElementById("sellersList");
-             for(var i=0;i<data.length;i++){
-                 const node = document.createElement("li");
-                 const textnode = document.createTextNode(data[i].id + " , " +data[i].userid + " , " +data[i].name 
-                 + " , " +data[i].contactno+ " , " +data[i].location + + " , " +data[i].createdat + " , " +data[i].modifiedat );
-                 node.appendChild(textnode);
-                 productList.appendChild(node);
-             }  
+            let productList = document.getElementById("sellersList");
+            for (var i = 0; i < data.length; i++) {
+                const node = document.createElement("li");
+                const textnode = document.createTextNode(data[i].id + " , " + data[i].userid + " , " + data[i].name
+                    + " , " + data[i].contactno + " , " + data[i].location + + " , " + data[i].createdat + " , " + data[i].modifiedat);
+                node.appendChild(textnode);
+                productList.appendChild(node);
+            }
         }
     });
-} 
+}
 var fetchStaffs = () => {
     let url = "http://localhost:11000/api/staffs";
 
 
     $.ajax({
         dataType: "json",
-        type:"GET",
+        type: "GET",
         url: url,
         success: (data) => {
             console.log(data);
             let Data = JSON.stringify(data);
-            let productList=document.getElementById("staffsList");
-             for(var i=0;i<data.length;i++){
-                 const node = document.createElement("li");
-                 const textnode = document.createTextNode(data[i].id + " , " +data[i].userid + " , " +data[i].firstname 
-                 + " , " +data[i].lastname+ " , " +data[i].contactno + " , " +data[i].empid  + " , " +data[i].createdat + " , " +data[i].modifiedat );
-                 node.appendChild(textnode);
-                 productList.appendChild(node);
-             }  
+            let productList = document.getElementById("staffsList");
+            for (var i = 0; i < data.length; i++) {
+                const node = document.createElement("li");
+                const textnode = document.createTextNode(data[i].id + " , " + data[i].userid + " , " + data[i].firstname
+                    + " , " + data[i].lastname + " , " + data[i].contactno + " , " + data[i].empid + " , " + data[i].createdat + " , " + data[i].modifiedat);
+                node.appendChild(textnode);
+                productList.appendChild(node);
+            }
         }
     });
-} 
+}
 var fetchTransactions = () => {
     let url = "http://localhost:11000/api/transactions";
 
 
     $.ajax({
         dataType: "json",
-        type:"GET",
+        type: "GET",
         url: url,
         success: (data) => {
             console.log(data);
             let Data = JSON.stringify(data);
-            let productList=document.getElementById("listTransactions");
-             for(var i=0;i<data.length;i++){
-                 const node = document.createElement("li");
-                 const textnode = document.createTextNode(data[i].id + " , " +data[i].fromaccount + " , " +data[i].toaccount 
-                 + " , " +data[i].amount + " , " +data[i].createdat  );
-                 node.appendChild(textnode);
-                 productList.appendChild(node);
-             }  
+            let productList = document.getElementById("listTransactions");
+            for (var i = 0; i < data.length; i++) {
+                const node = document.createElement("li");
+                const textnode = document.createTextNode(data[i].id + " , " + data[i].fromaccount + " , " + data[i].toaccount
+                    + " , " + data[i].amount + " , " + data[i].createdat);
+                node.appendChild(textnode);
+                productList.appendChild(node);
+            }
         }
     });
-} 
+}
 var fetchVendors = () => {
     let url = "http://localhost:11000/api/vendors";
 
 
     $.ajax({
         dataType: "json",
-        type:"GET",
+        type: "GET",
         url: url,
         success: (data) => {
             console.log(data);
             let Data = JSON.stringify(data);
-            let productList=document.getElementById("listVendors");
-             for(var i=0;i<data.length;i++){
-                 const node = document.createElement("li");
-                 const textnode = document.createTextNode(data[i].id + " , " +data[i].userid + " , " +data[i].name 
-                 + " , " +data[i].contactno + " , " +data[i].createdat + " , " +data[i].modifiedat );
-                 node.appendChild(textnode);
-                 productList.appendChild(node);
-             }  
+            let productList = document.getElementById("listVendors");
+            for (var i = 0; i < data.length; i++) {
+                const node = document.createElement("li");
+                const textnode = document.createTextNode(data[i].id + " , " + data[i].userid + " , " + data[i].name
+                    + " , " + data[i].contactno + " , " + data[i].createdat + " , " + data[i].modifiedat);
+                node.appendChild(textnode);
+                productList.appendChild(node);
+            }
         }
     });
 }
@@ -347,7 +347,7 @@ var fetchVendors = () => {
 //}
 
 //===================================================
- function onregister() {
+function onregister() {
 
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
@@ -356,9 +356,9 @@ var fetchVendors = () => {
     credentials.email = email;
     credentials.password = password;
     credentials.usertype = usertype;
-   let loginUrl = "//localhost:11000/api/users";
-  //  console.log(credentials)
-  
+    let loginUrl = "//localhost:11000/api/users";
+    //  console.log(credentials)
+
     $.ajax({
         type: "POST",
         url: loginUrl,
@@ -368,7 +368,7 @@ var fetchVendors = () => {
             console.log(status);
 
         }
-    
+
     });
 }
 
@@ -381,9 +381,9 @@ function fundTransactions() {
     credentials.fromaccount = fromaccount;
     credentials.toaccount = toaccount;
     credentials.amount = amount;
-   let loginUrl = "//localhost:11000/api/fundTransactions";
-  //  console.log(credentials)
-  
+    let loginUrl = "//localhost:11000/api/fundTransactions";
+    //  console.log(credentials)
+
     $.ajax({
         type: "POST",
         url: loginUrl,
@@ -393,7 +393,7 @@ function fundTransactions() {
             console.log(status);
 
         }
-    
+
     });
 }
 
@@ -411,7 +411,7 @@ var fetchOrders = () => {
             let ordersList = document.getElementById("listOrders");
             for (var i = 0; i < result.length; i++) {
                 const node = document.createElement("li");
-                const textnode = document.createTextNode(result[i].status + " , " + result[i].customerid + " , " + result[i].createdat+ " , " + result[i].modifiedat);
+                const textnode = document.createTextNode(result[i].status + " , " + result[i].customerid + " , " + result[i].createdat + " , " + result[i].modifiedat);
                 node.appendChild(textnode);
                 ordersList.appendChild(node);
             }

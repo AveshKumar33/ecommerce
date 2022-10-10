@@ -1,7 +1,7 @@
 
 import mysql from "./mysqldbmgr.js";
 export default class OrderManager {
-  constructor() {}
+  constructor() { }
 
   insert = (req, res) => {
     return new Promise((resolve) => {
@@ -64,7 +64,7 @@ export default class OrderManager {
   };
   topTenOrders = () => {
     return new Promise((resolve) => {
-      let command =`select orderid,count(*) mostPaymentsOnOrders from payments group by orderid order by mostPaymentsOnOrders desc limit 10 `;
+      let command = `select orderid,count(*) mostPaymentsOnOrders from payments group by orderid order by mostPaymentsOnOrders desc limit 10 `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);

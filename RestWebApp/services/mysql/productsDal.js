@@ -1,9 +1,9 @@
 
 import mysql from "./mysqldbmgr.js";
 export default class ProductManager {
-  constructor() {}
+  constructor() { }
 
-  insert = (req, res,next) => {
+  insert = (req, res, next) => {
     return new Promise((resolve) => {
       var cmd = `INSERT INTO products(title,description,imageurl,quantity,price,categoryid,sellerid,createdat,modifiedat)
        values('${req.body.title}',

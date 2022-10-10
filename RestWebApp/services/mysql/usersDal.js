@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import mysql from "./mysqldbmgr.js";
 export default class UserManager {
-  constructor() {}
+  constructor() { }
 
   insert = (req, res) => {
     return new Promise((resolve) => {
@@ -63,7 +63,7 @@ export default class UserManager {
     });
   };
   // Seller
-login = function (req,res) {
+  login = function (req, res) {
     return new Promise((resolve) => {
       let data = req.body;
       let command = `SELECT email FROM users WHERE email="${data.email}" AND password="${data.password}"`;
@@ -71,25 +71,25 @@ login = function (req,res) {
         if (err) {
           console.log("Error:", err);
         }
-       
+
         let allUsersStr = JSON.stringify(rows);
         var allUsers = JSON.parse(allUsersStr);
         if (allUsers.length > 0) {
-          const token=jwt.sign({
-            email:allUsers[0].email,
+          const token = jwt.sign({
+            email: allUsers[0].email,
           },
-          
-            'SECRET',{
-              expiresIn:'7d'
-            
+
+            'SECRET', {
+            expiresIn: '7d'
+
           })
-        
-            console.log(
-             "token="+ token
-            );
-            
-        resolve(token);
-          
+
+          console.log(
+            "token=" + token
+          );
+
+          resolve(token);
+
         } else {
           resolve("Invalid User");
         }

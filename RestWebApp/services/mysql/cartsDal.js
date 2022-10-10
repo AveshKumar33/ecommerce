@@ -1,7 +1,7 @@
 
 import mysql from "./mysqldbmgr.js";
 export default class CartManager {
-  constructor() {}
+  constructor() { }
 
   insert = (req, res) => {
     return new Promise((resolve) => {
