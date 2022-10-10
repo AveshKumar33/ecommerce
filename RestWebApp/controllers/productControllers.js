@@ -17,7 +17,7 @@ export default class ProductController {
     console.log(result);
   };
 
-  post = async (req, res) => {
+  post = async (req, res,next) => {
     let result = await this.dal.insert(req);
     console.log(result);
     res.send(result);

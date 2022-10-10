@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Product Catalog</title>
-        <script src="/scripts/jquery-3.2.1.min.js"></script>
-        <script src="/scripts/app.js"></script>
-    </head>
-    <body>
-        <h1>Transflower Store</h1>
-        <hr/>
-        <a href="index.html">Home</a> | <a href="products.html">products</a> 
-        | <a href="login.html">login</a>| <a href="orders.html">orders</a>
-        | <a href="register.html">register</a> | <a href="productDetails.html">productDetailById</a>  
-        | <a href="accounts.html">accounts</a> | <a href="categories.html">categories</a>
-        | <a href="customers.html">customers</a> | <a href="deliveries.html">deliveries</a> 
-        | <a href="feedbacks.html">feedbacks</a> | <a href="orderDetails.html">orderDetails</a>
-        | <a href="payments.html">payments</a> | <a href="sellers.html">sellers</a>
-        | <a href="staffs.html">staffs</a> | <a href="transactions.html">transactions</a>
-        | <a href="vendors.html">vendors</a> | <a href="transactions.html">transactions</a>
-        | <a href="transactions.html">transactions</a> | <a href="transactions.html">transactions</a>
-        <hr/>
-        <div>
-             <h2>Todays orders </h2>
-             <button onclick="fetchOrders()">Get all Orders</button>
-             <ul id="listOrders">
-                
-             </ul>
-             
 
-             
-        </div>
-    </body>
+<head>
+    <title>Product Catalog</title>
+    <script src="/scripts/jquery-3.2.1.min.js"></script>
+    <script src="/scripts/app.js"></script>
+</head>
+
+<body>
+    <h1 style="color: blue;">TOTAL deliveries</h1>
+    <hr />
+    <a href="index.html">Home</a> | <a href="products.html">products</a> 
+    | <a href="login.html">login</a>| <a href="orders.html">orders</a>
+    | <a href="register.html">register</a> | <a href="productDetails.html">productDetailById</a>  
+    | <a href="accounts.html">accounts</a> | <a href="categories.html">categories</a>
+    | <a href="customers.html">customers</a> | <a href="deliveries.html">deliveries</a> 
+    | <a href="feedbacks.html">feedbacks</a> | <a href="orderDetails.html">orderDetails</a>
+    | <a href="payments.html">payments</a> | <a href="sellers.html">sellers</a>
+    | <a href="staffs.html">staffs</a> | <a href="transactions.html">transactions</a>
+    | <a href="vendors.html">vendors</a> | <a href="fundTransactions.html">fundTransactions</a>
+    | <a href="cart.html">cart</a> | <a href="addToCart.html">addToCart</a> | <a href="removeFromCart.html">removeFromCart</a>
+    <hr />
+    <div>
+        <h2 style="color: red;">Todays deliveries</h2>
+        <button onclick="fetchDeliveries()">total deliveries</button>
+        <ul id="deliveriesList">
+
+        </ul>
+
+        <p id="para"></p>
+
+    </div>
+</body>
+
 </html>

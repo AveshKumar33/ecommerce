@@ -28,161 +28,183 @@ import TransactionController from '../controllers/transactionControllers.js';
 import TransactionManager from '../services/mysql/transactionsDal.js';
 import VendorController from '../controllers/vendorControllers.js';
 import VendorManager from '../services/mysql/vendorsDal.js';
-export default function(app){
-    //====================== for vendorss========================================>    
-    var mgr=new VendorManager();
-    var controller=new VendorController(mgr); 
-                 app.route("/api/vendors")
-                    .get(controller.getAll)
-                    .post(controller.post);
-                 app.route("/api/vendors/:id")
-                    .get(controller.getById)
-                    .delete(controller.delete)
-                    .put(controller.put);
-    //====================== for transactions========================================>    
-    var mgr=new TransactionManager();
-    var controller=new TransactionController(mgr); 
-                 app.route("/api/transactions")
-                    .get(controller.getAll)
-                    .post(controller.post);
-                 app.route("/api/transactions/:id")
-                    .get(controller.getById)
-                    .delete(controller.delete)
-                    .put(controller.put);    
-   //====================== for staffs========================================>    
-   var mgr=new StaffManager();
-   var controller=new StaffController(mgr); 
-                app.route("/api/staffs")
-                   .get(controller.getAll)
-                   .post(controller.post);
-                app.route("/api/staff/:id")
-                   .get(controller.getById)
-                   .delete(controller.delete)
-                   .put(controller.put);  
-   //====================== for sellers========================================>    
-   var mgr=new SellerManager();
-   var controller=new SellerController(mgr); 
-                app.route("/api/sellers")
-                   .get(controller.getAll)
-                   .post(controller.post);
-                app.route("/api/sellers/:id")
-                   .get(controller.getById)
-                   .delete(controller.delete)
-                   .put(controller.put);  
-   //====================== for products========================================>    
-   var mgr=new ProductManager();
-   var controller=new ProductController(mgr); 
-                app.route("/api/products")
-                   .get(controller.getAll)
-                   .post(controller.post);
-                app.route("/api/product/:id")
-                   .get(controller.getById)
-                   .delete(controller.delete)
-                   .put(controller.put);     
-   //====================== for payments========================================>    
-   var mgr=new PaymentManager();
-   var controller=new PaymentController(mgr); 
-                app.route("/api/payments")
-                   .get(controller.getAll)
-                   .post(controller.post);
-                app.route("/api/payments/:id")
-                   .get(controller.getById)
-                   .delete(controller.delete)
-                   .put(controller.put); 
-   //====================== for orders========================================>    
-   var mgr=new OrderManager();
-   var controller=new OrderController(mgr); 
-                app.route("/api/orders")
-                   .get(controller.getAll)
-                   .post(controller.post);
-                app.route("/api/orders/:id")
-                   .get(controller.getById)
-                   .delete(controller.delete)
-                   .put(controller.put);     
-   //====================== for orderDetails========================================>    
-   var mgr=new OrderDetailManager();
-   var controller=new OrderDetailController(mgr); 
-                app.route("/api/orderDetails")
-                   .get(controller.getAll)
-                   .post(controller.post);
-                app.route("/api/orderDetails/:id")
-                   .get(controller.getById)
-                   .delete(controller.delete)
-                   .put(controller.put); 
-   //====================== for feedbacks========================================>    
-   var mgr=new FeedbackManager();
-   var controller=new FeedbackController(mgr); 
-                app.route("/api/feedbacks")
-                   .get(controller.getAll)
-                   .post(controller.post);
-                app.route("/api/feedbacks/:id")
-                   .get(controller.getById)
-                   .delete(controller.delete)
-                   .put(controller.put); 
-   //====================== for deliveries========================================>    
-   var mgr=new DeliveryManager();
-   var controller=new DeliveryController(mgr); 
-                app.route("/api/deliveries")
-                   .get(controller.getAll)
-                   .post(controller.post);
-                app.route("/api/deliveries/:id")
-                   .get(controller.getById)
-                   .delete(controller.delete)
-                   .put(controller.put);     
-  //====================== for customers========================================>    
-  var mgr=new CustomerManager();
-  var controller=new CustomerController(mgr); 
-               app.route("/api/customers")
-                  .get(controller.getAll)
-                  .post(controller.post);
-               app.route("/api/customers/:id")
-                  .get(controller.getById)
-                  .delete(controller.delete)
-                  .put(controller.put);     
- //====================== for categories========================================>    
- var mgr=new CategoryManager();
- var controller=new CategoryController(mgr); 
-              app.route("/api/categories")
-                 .get(controller.getAll)
-                 .post(controller.post);
-              app.route("/api/categories/:id")
-                 .get(controller.getById)
-                 .delete(controller.delete)
-                 .put(controller.put);   
- //====================== for carts========================================>    
-var mgr=new CartManager();
-var controller=new CartController(mgr); 
-             app.route("/api/carts")
-                .get(controller.getAll)
-                .post(controller.post);
-             app.route("/api/carts/:id")
-                .get(controller.getById)
-                .delete(controller.delete)
-                .put(controller.put);   
-//====================== for accounts========================================>    
-var mgr=new AccountManager();
-var controller=new AccountController(mgr); 
-             app.route("/api/accounts")
-                .get(controller.getAll)
-                .post(controller.post);
-             app.route("/api/accounts/:id")
-                .get(controller.getById)
-                .delete(controller.delete)
-                .put(controller.put);
+import FundController from '../controllers/fundTransactionControllers.js';
+import FundManager from '../services/mysql/fundTransactionDal.js';
+import User from '../services/middleware/user.js';
 
-//====================== for users========================================>    
-   var mgr=new UserManager();
-   var controller=new UserController(mgr);  
-                app.route("/api/users")
-                   .get(controller.getAll)
-                   .post(controller.post);
-                app.route("/api/users/:id")
-                   .get(controller.getById)
-                   .delete(controller.delete);
-                app.route("/api/users/:email")
-                   .put(controller.put);
-                app.route("/api/login")
-                   .post(controller.login);   
-         
+
+export default function (app) {
+   //====================== for vendorss========================================>    
+   var mgr = new VendorManager();
+   var controller = new VendorController(mgr);
+   app.route("/api/vendors")
+      .get(controller.getAll)
+      .post(controller.post);
+   app.route("/api/vendors/:id")
+      .get(controller.getById)
+      .delete(controller.delete)
+      .put(controller.put);
+   //====================== for transactions========================================>    
+   var mgr = new TransactionManager();
+   var controller = new TransactionController(mgr);
+   app.route("/api/transactions")
+      .get(controller.getAll)
+      .post(controller.post);
+   app.route("/api/transactions/:id")
+      .get(controller.getById)
+      .delete(controller.delete)
+      .put(controller.put);
+   //====================== for staffs========================================>    
+   var mgr = new StaffManager();
+   var controller = new StaffController(mgr);
+   app.route("/api/staffs")
+      .get(controller.getAll)
+      .post(controller.post);
+   app.route("/api/staff/:id")
+      .get(controller.getById)
+      .delete(controller.delete)
+      .put(controller.put);
+   //====================== for sellers========================================>    
+   var mgr = new SellerManager();
+   var controller = new SellerController(mgr);
+   app.route("/api/sellers")
+      .get(controller.getAll)
+      .post(controller.post);
+   app.route("/api/sellers/:id")
+      .get(controller.getById)
+      .delete(controller.delete)
+      .put(controller.put);
+   //====================== for products========================================>    
+   var mgr = new ProductManager();
+   var controller = new ProductController(mgr);
+   app.route("/api/products")
+      .get(controller.getAll);
+
+   app.post("/api/products", User, controller.post);
+
+   // .post(controller.post);
+   app.route("/api/product/:id")
+      .get(controller.getById)
+      .delete(controller.delete)
+      .put(controller.put);
+   //====================== for payments========================================>    
+   var mgr = new PaymentManager();
+   var controller = new PaymentController(mgr);
+   app.route("/api/payments")
+      .get(controller.getAll)
+      .post(controller.post);
+   app.route("/api/payments/:id")
+      .get(controller.getById)
+      .delete(controller.delete)
+      .put(controller.put);
+   //====================== for orders========================================>    
+   var mgr = new OrderManager();
+   var controller = new OrderController(mgr);
+   app.route("/api/orders")
+      .get(controller.getAll)
+      .post(controller.post);
+   app.route("/api/orders/:id")
+      .get(controller.getById)
+      .delete(controller.delete)
+      .put(controller.put);
+   // app.route("/api/topTenOrders")
+   //    .get(controller.topTenOrders);
+   //====================== for orderDetails========================================>    
+   var mgr = new OrderDetailManager();
+   var controller = new OrderDetailController(mgr);
+   app.route("/api/orderDetails")
+      .get(controller.getAll)
+      .post(controller.post);
+   app.route("/api/orderDetails/:id")
+      .get(controller.getById)
+      .delete(controller.delete)
+      .put(controller.put);
+   //====================== for feedbacks========================================>    
+   var mgr = new FeedbackManager();
+   var controller = new FeedbackController(mgr);
+   app.route("/api/feedbacks")
+      .get(controller.getAll)
+      .post(controller.post);
+   app.route("/api/feedbacks/:id")
+      .get(controller.getById)
+      .delete(controller.delete)
+      .put(controller.put);
+   //====================== for deliveries========================================>    
+   var mgr = new DeliveryManager();
+   var controller = new DeliveryController(mgr);
+   app.route("/api/deliveries")
+      .get(controller.getAll)
+      .post(controller.post);
+   app.route("/api/deliveries/:id")
+      .get(controller.getById)
+      .delete(controller.delete)
+      .put(controller.put);
+   //====================== for customers========================================>    
+   var mgr = new CustomerManager();
+   var controller = new CustomerController(mgr);
+   app.route("/api/customers")
+      .get(controller.getAll)
+      .post(controller.post);
+   app.route("/api/customers/:id")
+      .get(controller.getById)
+      .delete(controller.delete)
+      .put(controller.put);
+   //====================== for categories========================================>    
+   var mgr = new CategoryManager();
+   var controller = new CategoryController(mgr);
+   app.route("/api/categories")
+      .get(controller.getAll)
+      .post(controller.post);
+   app.route("/api/categories/:id")
+      .get(controller.getById)
+      .delete(controller.delete)
+      .put(controller.put);
+   //====================== for carts========================================>    
+   var mgr = new CartManager();
+   var controller = new CartController(mgr);
+   app.route("/api/carts")
+      .get(controller.getAll)
+      .post(controller.post);
+   app.route("/api/carts/:id")
+      .get(controller.getById)
+      .delete(controller.delete)
+      .put(controller.put);
+   //====================== for accounts========================================>    
+   var mgr = new AccountManager();
+   var controller = new AccountController(mgr);
+   app.route("/api/accounts")
+      .get(controller.getAll)
+      .post(controller.post);
+   app.route("/api/accounts/:id")
+      .get(controller.getById)
+      .delete(controller.delete)
+      .put(controller.put);
+
+   //====================== for users========================================>    
+   var mgr = new UserManager();
+   var controller = new UserController(mgr);
+   app.route("/api/users")
+      .get(controller.getAll)
+      .post(controller.post);
+   app.route("/api/users/:id")
+      .get(controller.getById)
+      .delete(controller.delete);
+   app.route("/api/users/:email")
+      .put(controller.put);
+   app.route("/api/login")
+      .post(controller.login);
+   //=================================================================================================
+   app.get('/home', User, (req, res, next) => {
+      console.log("this is secret route");
+      res.send("this is secret route");
+
+   })
+
+   //===============================================================================================
+   var mgr = new FundManager();
+   var controller = new FundController(mgr);
+   app.route("/api/fundTransactions")
+      .post(controller.insert);
+
 }
 

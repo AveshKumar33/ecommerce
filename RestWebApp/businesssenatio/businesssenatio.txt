@@ -1,0 +1,17 @@
+
+========Top 10 sellers
+select sellerid,count(*) mostProductsSellBySeller from products 
+group by sellerid order by mostProductsSellBySeller desc limit 10; 
+
+
+========Top 10 customers
+select customerid,count(*) mostordersbycustomers from orders group by customerid order by 
+mostordersbycustomers desc limit 10; 
+
+=========Top 10 orders
+select orderid,count(*) mostPaymentsOnOrders from payments group by orderid order by
+ mostPaymentsOnOrders desc limit 10; 
+
+==================Top 10 vendor
+select vendorid,count(*) mostdeliveriessbyvendors from  group by venderid 
+order by mostdeliveriessbyvendors desc limit 10; 

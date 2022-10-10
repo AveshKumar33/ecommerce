@@ -1,36 +1,429 @@
 
 
 
+
 //ajax call
-var fetchData = () => {
-    console.log("wesrdghijofcgvhj");
+var fetchProducts = () => {
     let url = "http://localhost:11000/api/products";
 
+
+    $.ajax({
+        dataType: "json",
+        type:"GET",
+        url: url,
+        success: (data) => {
+           // console.log(data);
+            let Data = JSON.stringify(data);
+            // let para1 = document.getElementById("para");
+            // para1.innerHTML = strData;
+
+            //DOM tree Manipulation Code at Client Side
+        
+             for(var i=0;i<data.length;i++){
+                 const row = document.createElement("tr");
+                 row.innerHTML =`
+                 <td> ${data[i].id} </td>
+                 <td> ${data[i].title } </td>
+                 <td> ${data[i].description} </td>
+                 <td> ${data[i].imageurl} </td>
+                 <td> ${data[i].quantity} </td>
+                 <td> ${data[i].price} </td>
+                 <td> ${data[i].categoryid} </td>
+                 <td> ${data[i].sellerid} </td>
+                 <td> ${data[i].createdat} </td>
+                 <td> ${data[i].modifiedat} </td>
+                 <td> <button type="button" onclick="addToCart(${data[i]})">ADD TO CART!</button></td>`;
+                 document.getElementById("cart").appendChild(row);
+                 fetchProducts();
+                
+                 
+             }  
+        }
+    });
+}
+
+var addToCart = (i) => {
+    console.log(i);
+    let cart=new Array();
+    cart=JSON.parse(localStorage.getItem("products"))
+    cart.push(i);
+    localStorage.setItem('products',JSON.stringify(cart));
+}
+    var fetchAccounts = () => {
+        let url = "http://localhost:11000/api/accounts";
+    
+    
+        $.ajax({
+            dataType: "json",
+            type:"GET",
+            url: url,
+            success: (data) => {
+                console.log(data);
+                let Data = JSON.stringify(data);
+                let productList=document.getElementById("accountsList");
+                 for(var i=0;i<data.length;i++){
+                     const node = document.createElement("li");
+                     const textnode = document.createTextNode(data[i].id + " , " +data[i].accountnumber + " , " +data[i].balance 
+                     + " , " +data[i].userid + " , " +data[i].createdat + " , " +data[i].modifiedat );
+                     node.appendChild(textnode);
+                     productList.appendChild(node);
+                 }  
+            }
+        });
+} 
+var fetchCategories = () => {
+    let url = "http://localhost:11000/api/categories";
+
+
+    $.ajax({
+        dataType: "json",
+        type:"GET",
+        url: url,
+        success: (data) => {
+            console.log(data);
+            let Data = JSON.stringify(data);
+            let productList=document.getElementById("categoriesList");
+             for(var i=0;i<data.length;i++){
+                 const node = document.createElement("li");
+                 const textnode = document.createTextNode(data[i].id + " , " +data[i].name  + " , " +data[i].createdat + " , " +data[i].modifiedat );
+                 node.appendChild(textnode);
+                 productList.appendChild(node);
+             }  
+        }
+    });
+} 
+var fetchCustomers = () => {
+    let url = "http://localhost:11000/api/customers";
+
+
+    $.ajax({
+        dataType: "json",
+        type:"GET",
+        url: url,
+        success: (data) => {
+            console.log(data);
+            let Data = JSON.stringify(data);
+            let productList=document.getElementById("customersList");
+             for(var i=0;i<data.length;i++){
+                 const node = document.createElement("li");
+                 const textnode = document.createTextNode(data[i].id+ " , " +data[i].userid + " , " +data[i].firstname + " , " +data[i].lastname 
+                 + " , " +data[i].contactno + " , " +data[i].location + " , " +data[i].createdat+ " , " +data[i].modifiedat );
+                 node.appendChild(textnode);
+                 productList.appendChild(node);
+             }  
+        }
+    });
+} 
+var fetchDeliveries = () => {
+    let url = "http://localhost:11000/api/deliveries";
+
+
+    $.ajax({
+        dataType: "json",
+        type:"GET",
+        url: url,
+        success: (data) => {
+            console.log(data);
+            let Data = JSON.stringify(data);
+            let productList=document.getElementById("deliveriesList");
+             for(var i=0;i<data.length;i++){
+                 const node = document.createElement("li");
+                 const textnode = document.createTextNode(data[i].id + " , " +data[i].orderid + " , " +data[i].vendorid 
+                 + " , " +data[i].location + " , " +data[i].createdat + " , " +data[i].modifiedat );
+                 node.appendChild(textnode);
+                 productList.appendChild(node);
+             }  
+        }
+    });
+} 
+var fetchFeedbacks = () => {
+    let url = "http://localhost:11000/api/feedbacks";
+
+
+    $.ajax({
+        dataType: "json",
+        type:"GET",
+        url: url,
+        success: (data) => {
+            console.log(data);
+            let Data = JSON.stringify(data);
+            let productList=document.getElementById("feedbacksList");
+             for(var i=0;i<data.length;i++){
+                 const node = document.createElement("li");
+                 const textnode = document.createTextNode(data[i].id + " , " +data[i].imageurl + " , " +data[i].productid 
+                 + " , " +data[i].customerid+ " , " +data[i].description + " , " +data[i].createdat + " , " +data[i].modifiedat );
+                 node.appendChild(textnode);
+                 productList.appendChild(node);
+             }  
+        }
+    });
+} 
+var fetchOrderDetails = () => {
+    let url = "http://localhost:11000/api/orderDetails";
+
+
+    $.ajax({
+        dataType: "json",
+        type:"GET",
+        url: url,
+        success: (data) => {
+            console.log(data);
+            let Data = JSON.stringify(data);
+            let productList=document.getElementById("orderDetailsList");
+             for(var i=0;i<data.length;i++){
+                 const node = document.createElement("li");
+                 const textnode = document.createTextNode(data[i].id + " , " +data[i].quantity + " , " +data[i].price 
+                 + " , " +data[i].orderid+ " , " +data[i].productid + " , " +data[i].createdat + " , " +data[i].modifiedat );
+                 node.appendChild(textnode);
+                 productList.appendChild(node);
+             }  
+        }
+    });
+} 
+var fetchOrders = () => {
+    let url = "http://localhost:11000/api/orders";
+
+
+    $.ajax({
+        dataType: "json",
+        type:"GET",
+        url: url,
+        success: (data) => {
+            console.log(data);
+            let Data = JSON.stringify(data);
+            let productList=document.getElementById("ordersList");
+             for(var i=0;i<data.length;i++){
+                 const node = document.createElement("li");
+                 const textnode = document.createTextNode(data[i].id + " , " +data[i].status + " , " +data[i].customerid 
+                 + " , " +data[i].createdat + " , " +data[i].modifiedat );
+                 node.appendChild(textnode);
+                 productList.appendChild(node);
+             }  
+        }
+    });
+} 
+var fetchPayments = () => {
+    let url = "http://localhost:11000/api/payments";
+
+
+    $.ajax({
+        dataType: "json",
+        type:"GET",
+        url: url,
+        success: (data) => {
+            console.log(data);
+            let Data = JSON.stringify(data);
+            let productList=document.getElementById("paymentsList");
+             for(var i=0;i<data.length;i++){
+                 const node = document.createElement("li");
+                 const textnode = document.createTextNode(data[i].id + " , " +data[i].totalamount + " , " +data[i].discountpercentage 
+                 + " , " +data[i].payableamount + " , " +data[i].orderid + " , " +data[i].modeofpayment + " , " +data[i].createdat + " , " +data[i].modifiedat );
+                 node.appendChild(textnode);
+                 productList.appendChild(node);
+             }  
+        }
+    });
+}
+var fetchSellers = () => {
+    let url = "http://localhost:11000/api/sellers";
+
+
+    $.ajax({
+        dataType: "json",
+        type:"GET",
+        url: url,
+        success: (data) => {
+            console.log(data);
+            let Data = JSON.stringify(data);
+            let productList=document.getElementById("sellersList");
+             for(var i=0;i<data.length;i++){
+                 const node = document.createElement("li");
+                 const textnode = document.createTextNode(data[i].id + " , " +data[i].userid + " , " +data[i].name 
+                 + " , " +data[i].contactno+ " , " +data[i].location + + " , " +data[i].createdat + " , " +data[i].modifiedat );
+                 node.appendChild(textnode);
+                 productList.appendChild(node);
+             }  
+        }
+    });
+} 
+var fetchStaffs = () => {
+    let url = "http://localhost:11000/api/staffs";
+
+
+    $.ajax({
+        dataType: "json",
+        type:"GET",
+        url: url,
+        success: (data) => {
+            console.log(data);
+            let Data = JSON.stringify(data);
+            let productList=document.getElementById("staffsList");
+             for(var i=0;i<data.length;i++){
+                 const node = document.createElement("li");
+                 const textnode = document.createTextNode(data[i].id + " , " +data[i].userid + " , " +data[i].firstname 
+                 + " , " +data[i].lastname+ " , " +data[i].contactno + " , " +data[i].empid  + " , " +data[i].createdat + " , " +data[i].modifiedat );
+                 node.appendChild(textnode);
+                 productList.appendChild(node);
+             }  
+        }
+    });
+} 
+var fetchTransactions = () => {
+    let url = "http://localhost:11000/api/transactions";
+
+
+    $.ajax({
+        dataType: "json",
+        type:"GET",
+        url: url,
+        success: (data) => {
+            console.log(data);
+            let Data = JSON.stringify(data);
+            let productList=document.getElementById("listTransactions");
+             for(var i=0;i<data.length;i++){
+                 const node = document.createElement("li");
+                 const textnode = document.createTextNode(data[i].id + " , " +data[i].fromaccount + " , " +data[i].toaccount 
+                 + " , " +data[i].amount + " , " +data[i].createdat  );
+                 node.appendChild(textnode);
+                 productList.appendChild(node);
+             }  
+        }
+    });
+} 
+var fetchVendors = () => {
+    let url = "http://localhost:11000/api/vendors";
+
+
+    $.ajax({
+        dataType: "json",
+        type:"GET",
+        url: url,
+        success: (data) => {
+            console.log(data);
+            let Data = JSON.stringify(data);
+            let productList=document.getElementById("listVendors");
+             for(var i=0;i<data.length;i++){
+                 const node = document.createElement("li");
+                 const textnode = document.createTextNode(data[i].id + " , " +data[i].userid + " , " +data[i].name 
+                 + " , " +data[i].contactno + " , " +data[i].createdat + " , " +data[i].modifiedat );
+                 node.appendChild(textnode);
+                 productList.appendChild(node);
+             }  
+        }
+    });
+}
+
+//++++++++++++++=+==========================================================++++++++++++++++++++++++++
+//var fetchOrders = () => {
+//     // let apiError;
+//     // let result;
+//     // token = localStorage.getItem("receivedtoken");
+//     fetch("//localhost:11000/api/orders", {
+//         //NEW - add a content-Type header
+//         // headers: {
+//         //     "Content-Type": "application/json",
+//         //     "Authorization": token
+//         // }
+//     // })
+//     //     .then(async response => {
+//     //         if (response.ok) {
+//     //             apiError = false;
+//     //             result = await response.json();
+//     //             console.log(result);
+//                 // DOM tree Manipulation Code at Client Side by using id
+//                 let ordersList = document.getElementById("listOrders");
+//                 for (var i = 0; i < result.length; i++) {
+//                     const node = document.createElement("li");
+//                     const textnode = document.createTextNode(result[i].orderId + " " + result[i].date + " " + result[i].status);
+//                     node.appendChild(textnode);
+//                     ordersList.appendChild(node);
+//                 }
+//             }
+//             else {
+//                 apiError = true;
+//             }
+//         })
+//         .catch(() => (apiError = true));
+//}
+
+//===================================================
+ function onregister() {
+
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+    let usertype = document.getElementById('usertype').value;
+    let credentials = {};
+    credentials.email = email;
+    credentials.password = password;
+    credentials.usertype = usertype;
+   let loginUrl = "//localhost:11000/api/users";
+  //  console.log(credentials)
+  
+    $.ajax({
+        type: "POST",
+        url: loginUrl,
+        data: credentials,
+        success: (data, status) => {
+            console.log(data);
+            console.log(status);
+
+        }
+    
+    });
+}
+
+function fundTransactions() {
+
+    let fromaccount = document.getElementById('fromaccount').value;
+    let toaccount = document.getElementById('toaccount').value;
+    let amount = document.getElementById('amount').value;
+    let credentials = {};
+    credentials.fromaccount = fromaccount;
+    credentials.toaccount = toaccount;
+    credentials.amount = amount;
+   let loginUrl = "//localhost:11000/api/fundTransactions";
+  //  console.log(credentials)
+  
+    $.ajax({
+        type: "POST",
+        url: loginUrl,
+        data: credentials,
+        success: (data, status) => {
+            console.log(data);
+            console.log(status);
+
+        }
+    
+    });
+}
+
+
+var fetchOrders = () => {
+    let url = "//localhost:11000/api/orders";
 
     $.ajax({
         dataType: "json",
         url: url,
         success: (data) => {
             console.log(data);
-            let strData = JSON.stringify(data);
-            let para1 = document.getElementById("para");
-            para1.innerHTML = strData;
+            let result = JSON.stringify(data);
 
-            //DOM tree Manipulation Code at Client Side
-            //let productList=document.getElementById("productList");
-            //  for(var i=0;i<data.length;i++){
-            //      const node = document.createElement("li");
-            //      const textnode = document.createTextNode(data[i].title);
-            //      node.appendChild(textnode);
-            //      productList.appendChild(node);
-            //  }  
+            let ordersList = document.getElementById("listOrders");
+            for (var i = 0; i < result.length; i++) {
+                const node = document.createElement("li");
+                const textnode = document.createTextNode(result[i].status + " , " + result[i].customerid + " , " + result[i].createdat+ " , " + result[i].modifiedat);
+                node.appendChild(textnode);
+                ordersList.appendChild(node);
+            }
         }
     });
-}//without ajax call
+}
+
+//without ajax call
 var fetchProductDetails = () => {
     let apiError;
     let result;
-    fetch("//localhost:11000/api/products/2", {
+    fetch("//localhost:11000/api/products/:2", {
         //NEW - add a content-Type header
         headers: {
             "Content-Type": "application/json"
@@ -52,7 +445,7 @@ var fetchProductDetails = () => {
         .catch(() => (apiError = true));
 }
 var onLogin = () => {
-    console.log('jjjjjjjjjjjjjjjjjj')
+
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
     let credentials = {};
@@ -71,59 +464,15 @@ var onLogin = () => {
         }
     });
 }
-
-var fetchOrders = () => {
-    let apiError;
-    let result;
-    token = localStorage.getItem("receivedtoken");
-    fetch("//localhost:11000/api/orders", {
-        //NEW - add a content-Type header
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": token
-        }
-    })
-        .then(async response => {
-            if (response.ok) {
-                apiError = false;
-                result = await response.json();
-                console.log(result);
-                // DOM tree Manipulation Code at Client Side by using id
-                let ordersList = document.getElementById("listOrders");
-                for (var i = 0; i < result.length; i++) {
-                    const node = document.createElement("li");
-                    const textnode = document.createTextNode(result[i].orderId + " " + result[i].date + " " + result[i].status);
-                    node.appendChild(textnode);
-                    ordersList.appendChild(node);
-                }
-            }
-            else {
-                apiError = true;
-            }
-        })
-        .catch(() => (apiError = true));
-}
-
-
-var register = () => {
-
-    let email = document.getElementById('email').value;
-    let password = document.getElementById('password').value;
-    let usertype = document.getElementById('usertype').value;
-    let credentials = {};
-    credentials.email = email;
-    credentials.password = password;
-    credentials.usertype = usertype;
-    let loginUrl = "//localhost:11000/api/users";
-    //console.log(credentials)
-    $.ajax({
-        url: loginUrl,
-        type: "post",
-        data: credentials,
-        success: (data, status) => {
-            console.log(data);
-            console.log(status);
-            localStorage.setItem("receivedtoken", data);//bro cache mem
-        }
-    });
-}
+// verifyjwttoken = (req, res, next) => {
+//     const token = req.headers["authorization"];
+//     if (!token) return res.status(401).json("Unauthorize user");
+//     try {
+//       const decoded = jwt.verify(token, config.jwtSecretKey);
+//       req.user = decoded;
+//       console.log("Validation Successful");
+//       next();
+//     } catch (e) {
+//       res.status(400).json("Token not valid");
+//     }
+//   };

@@ -3,10 +3,12 @@ import mysql from "./mysqldbmgr.js";
 export default class ProductManager {
   constructor() {}
 
-  insert = (req, res) => {
+  insert = (req, res,next) => {
     return new Promise((resolve) => {
-      var cmd = `INSERT INTO products(title,description,imageurl,quantity,price,categoryid,sellerid,createdat,modifiedat) values('${req.body.title}',\n"+"
-      '${req.body.description}','${req.body.imageurl}','${req.body.quantity}','${req.body.price}','${req.body.categoryid}','${req.body.sellerid}',\n"+"
+      var cmd = `INSERT INTO products(title,description,imageurl,quantity,price,categoryid,sellerid,createdat,modifiedat)
+       values('${req.body.title}',
+      '${req.body.description}','${req.body.imageurl}','${req.body.quantity}','${req.body.price}',
+      '${req.body.categoryid}','${req.body.sellerid}'
       ,'${req.body.createdat}','${req.body.modifiedat}')`;
 
       console.log(cmd);
@@ -17,6 +19,7 @@ export default class ProductManager {
           console.log(rows);
 
           resolve(rows);
+          next();
         }
       });
     });

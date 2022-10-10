@@ -1,0 +1,39 @@
+<!DOCTYPE html>   
+<html>   
+<head>  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<title><h1 style="color:red;">foundTransaction Page</h1></title>
+<script src="/scripts/jquery-3.2.1.min.js"></script>
+<script src="/scripts/app.js"></script>
+
+</head>    
+<body>   
+    <hr/>
+    <a href="index.html">Home</a> | <a href="products.html">products</a> 
+    | <a href="login.html">login</a>| <a href="orders.html">orders</a>
+    | <a href="register.html">register</a> | <a href="productDetails.html">productDetailById</a>  
+    | <a href="accounts.html">accounts</a> | <a href="categories.html">categories</a>
+    | <a href="customers.html">customers</a> | <a href="deliveries.html">deliveries</a> 
+    | <a href="feedbacks.html">feedbacks</a> | <a href="orderDetails.html">orderDetails</a>
+    | <a href="payments.html">payments</a> | <a href="sellers.html">sellers</a>
+    | <a href="staffs.html">staffs</a> | <a href="transactions.html">transactions</a>
+    | <a href="vendors.html">vendors</a> | <a href="fundTransactions.html">fundTransactions</a>
+    | <a href="cart.html">cart</a> | <a href="addToCart.html">addToCart</a> | <a href="removeFromCart.html">removeFromCart</a>
+    <hr/>
+    <center> <h3 style="color: red;">Users foundTransaction Form</h3> </center>   
+	<center>
+        <div class="container">   
+		
+            <label for="fromaccount">FROMACCOUNT ID : </label><br> 
+            <input type="fromaccount" placeholder="Enter fromaccount id" id="fromaccount" name="fromaccount" required> <br> 
+            <label for="toaccount">TOACCOUNT ID : </label><br>
+            <input type="toaccount" placeholder="Enter toaccount id" id="toaccount" name="toaccount" required><br>
+			<label for="amount">AMOUNT : </label><br>
+            <input type="amount" placeholder="Enter amount" id="amount" name="amount" required><br>
+			<br/>
+			<button type="button"  onclick="fundTransactions()">foundTransaction</button>
+	
+        </div> 
+	</center> 
+</body>     
+</html> 

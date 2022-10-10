@@ -35,4 +35,9 @@ export default class OrderController {
     console.log(result);
     res.send(result);
   };
+  topTenOrders = async (req, res) => {
+    let data = [];
+    data = await dal.topTenOrders();
+    res.send(data);
+  };
 }
