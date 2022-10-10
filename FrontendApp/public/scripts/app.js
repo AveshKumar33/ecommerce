@@ -13,7 +13,7 @@ var fetchProducts = () => {
         url: url,
         success: (data) => {
             // console.log(data);
-            let Data = JSON.stringify(data);
+            //let Data = JSON.stringify(data);
             // let para1 = document.getElementById("para");
             // para1.innerHTML = strData;
 

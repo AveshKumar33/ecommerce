@@ -11,12 +11,12 @@ export default class ProductManager {
       '${req.body.categoryid}','${req.body.sellerid}'
       ,'${req.body.createdat}','${req.body.modifiedat}')`;
 
-      console.log(cmd);
+      //console.log(cmd);
       mysql.query(cmd, (err, rows, fields) => {
         if (err) {
           console.log(err);
         } else {
-          console.log(rows);
+         // console.log(rows);
 
           resolve(rows);
           next();
