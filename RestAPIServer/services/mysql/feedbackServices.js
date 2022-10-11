@@ -3,7 +3,7 @@ import mysql from "./mysqlDBManager.js";
 export default class FeedbackManager {
   constructor() { }
 
-  insert = (req, res) => {
+  registerNewFeedback = (req, res) => {
     return new Promise((resolve) => {
       var cmd = `INSERT INTO feedbacks(imageurl,productid,customerid,description,createdat,modifiedat) values('${req.body.imageurl}',\n"+"
       '${req.body.productid}','${req.body.customerid}','${req.body.description}','${req.body.createdat}','${req.body.modifiedat}')`;
@@ -21,7 +21,7 @@ export default class FeedbackManager {
     });
   };
 
-  update = (req, res) => {
+  updateFeedbackById = (req, res) => {
     return new Promise((resolve) => {
       let command = `UPDATE feedbacks SET description="${req.body.description}",customerid = "${req.params.customerid}" WHERE id = "${req.params.id}"`;
       console.log(command);
@@ -31,9 +31,9 @@ export default class FeedbackManager {
     });
   };
 
-  getAll = () => {
+  showAllFeedbacks = () => {
     return new Promise((resolve) => {
-      let command = `SELECT * FROM feedbacks `;
+      let command = `SELECT imageurl,productid,customerid,description,createdat,modifiedat FROM feedbacks `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -41,18 +41,18 @@ export default class FeedbackManager {
     });
   };
 
-  getById = (req, res) => {
+  showFeedbackById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `SELECT * FROM feedbacks WHERE id="${id}"`;
+      let command = `SELECT imageurl,productid,customerid,description,createdat,modifiedat FROM feedbacks WHERE id="${id}"`;
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
       });
     });
   };
 
-  delete = (req, res) => {
+  removeFeedbackById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)

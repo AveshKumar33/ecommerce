@@ -2,42 +2,42 @@
 export default class UserController {
     //constructor Dependency Injection
     constructor(mgr) {
-      this.dal = mgr;
+      this.userService = mgr;
     }
   
-    getAll = async (req, res) => {
-      let result = await this.dal.getAll();
+    showAllUsers = async (req, res) => {
+      let result = await this.userService.showAllUsers();
       res.send(result);
       console.log(result);
     };
   
-    getById = async (req, res) => {
+    showUserById = async (req, res) => {
       console.log(req.params.id)
-      let result = await this.dal.getById(req);
+      let result = await this.userService.showUserById(req);
       res.send(result);
       console.log(result);
     };
   
-    post = async (req, res) => {
-      let result = await this.dal.insert(req);
+    registerNewUser = async (req, res) => {
+      let result = await this.userService.registerNewUser(req);
       console.log(result);
       res.send(result);
     };
   
-    put = async (req, res) => {
-      let result = await this.dal.update(req);
+    updateUserById = async (req, res) => {
+      let result = await this.userService.updateUserById(req);
       console.log(result);
       res.send(result);
     };
   
-    delete = async (req, res) => {
+    removeUserById = async (req, res) => {
       console.log(req.body);
-      let result = await this.dal.delete(req);
+      let result = await this.userService.removeUserById(req);
       console.log(result);
       res.send(result);
     };
     login = async (req, res) => {
-      let result = await this.dal.login(req);
+      let result = await this.userService.login(req);
       console.log(result);
       res.send(result);
     };

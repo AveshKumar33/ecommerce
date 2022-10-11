@@ -2,36 +2,35 @@
 export default class StaffController {
     //constructor Dependency Injection
     constructor(mgr) {
-      this.dal = mgr;
+      this.staffService = mgr;
     }
-  
-    getAll = async (req, res) => {
-      let result = await this.dal.getAll();
+    showAllStaffs = async (req, res) => {
+      let result = await this.staffService.showAllStaffs();
       res.send(result);
       console.log(result);
     };
   
-    getById = async (req, res) => {
-      let result = await this.dal.getById(req);
+    showStaffById = async (req, res) => {
+      let result = await this.staffService.showStaffById(req);
       res.send(result);
       console.log(result);
     };
   
-    post = async (req, res) => {
-      let result = await this.dal.insert(req);
+    registerNewStaff = async (req, res) => {
+      let result = await this.staffService.registerNewStaff(req);
       console.log(result);
       res.send(result);
     };
   
-    put = async (req, res) => {
-      let result = await this.dal.update(req);
+    updateStaffById = async (req, res) => {
+      let result = await this.staffService.updateStaffById(req);
       console.log(result);
       res.send(result);
     };
   
-    delete = async (req, res) => {
+    removeStaffById = async (req, res) => {
       console.log(req.body);
-      let result = await this.dal.delete(req);
+      let result = await this.staffService.removeStaffById(req);
       console.log(result);
       res.send(result);
     };

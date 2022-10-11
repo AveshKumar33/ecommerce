@@ -3,7 +3,7 @@ import mysql from "./mysqlDBManager.js";
 export default class UserManager {
   constructor() { }
 
-  insert = (req, res) => {
+  registerNewUser = (req, res) => {
     return new Promise((resolve) => {
       var cmd = `INSERT INTO users(email,password,usertype) values('${req.body.email}','${req.body.password}','${req.body.usertype}')`;
 
@@ -20,7 +20,7 @@ export default class UserManager {
     });
   };
 
-  update = (req, res) => {
+  updateUserById = (req, res) => {
     return new Promise((resolve) => {
       let command = `UPDATE users SET password="${req.body.password}" WHERE email = "${req.params.email}"`;
       console.log(command);
@@ -30,9 +30,9 @@ export default class UserManager {
     });
   };
 
-  getAll = () => {
+  showAllUsers = () => {
     return new Promise((resolve) => {
-      let command = `SELECT * FROM users `;
+      let command = `SELECT email,password,usertype FROM users `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -40,22 +40,22 @@ export default class UserManager {
     });
   };
 
-  getById = (req, res) => {
+  showUserById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `SELECT * FROM users WHERE id="${id}"`;
+      let command = `SELECT email,password,usertype FROM users WHERE id="${id}"`;
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
       });
     });
   };
 
-  delete = (req, res) => {
+  removeUserById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `DELETE * FROM users WHERE id="${id}"`;
+      let command = `DELETE  FROM users WHERE id="${id}"`;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);

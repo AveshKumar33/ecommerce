@@ -2,36 +2,36 @@
 export default class AccountController {
   //constructor Dependency Injection
   constructor(mgr) {
-    this.dal = mgr;
+    this.accountService = mgr;
   }
 
-  getAll = async (req, res) => {
-    let result = await this.dal.getAll();
+  showAllAccounts = async (req, res) => {
+    let result = await this.accountService.showAllAccounts();
     res.send(result);
     console.log(result);
   };
 
-  getById = async (req, res) => {
-    let result = await this.dal.getById(req);
+  showAccountById = async (req, res) => {
+    let result = await this.accountService.showAccountById(req);
     res.send(result);
     console.log(result);
   };
 
-  post = async (req, res) => {
-    let result = await this.dal.insert(req);
+  registerNewAccount = async (req, res) => {
+    let result = await this.accountService.registerNewAccount(req);
     console.log(result);
     res.send(result);
   };
 
-  put = async (req, res) => {
-    let result = await this.dal.update(req);
+  updateAccountById = async (req, res) => {
+    let result = await this.accountService.updateAccountById(req);
     console.log(result);
     res.send(result);
   };
 
-  delete = async (req, res) => {
+  removeAccountById = async (req, res) => {
     console.log(req.body);
-    let result = await this.dal.delete(req);
+    let result = await this.accountService.removeAccountById(req);
     console.log(result);
     res.send(result);
   };

@@ -2,36 +2,36 @@
 export default class SellerController {
   //constructor Dependency Injection
   constructor(mgr) {
-    this.dal = mgr;
+    this.sellerService = mgr;
   }
 
-  getAll = async (req, res) => {
-    let result = await this.dal.getAll();
+  showAllSellers = async (req, res) => {
+    let result = await this.sellerService.showAllSellers();
     res.send(result);
     console.log(result);
   };
 
-  getById = async (req, res) => {
-    let result = await this.dal.getById(req);
+  showSellerById = async (req, res) => {
+    let result = await this.sellerService.showSellerById(req);
     res.send(result);
     console.log(result);
   };
 
-  post = async (req, res) => {
-    let result = await this.dal.insert(req);
+  registerNewSeller = async (req, res) => {
+    let result = await this.sellerService.registerNewSeller(req);
     console.log(result);
     res.send(result);
   };
 
-  put = async (req, res) => {
-    let result = await this.dal.update(req);
+  updateSellerById = async (req, res) => {
+    let result = await this.sellerService.updateSellerById(req);
     console.log(result);
     res.send(result);
   };
 
-  delete = async (req, res) => {
+  removeSellerById = async (req, res) => {
     console.log(req.body);
-    let result = await this.dal.delete(req);
+    let result = await this.sellerService.removeSellerById(req);
     console.log(result);
     res.send(result);
   };

@@ -2,36 +2,36 @@
 export default class OrderDetailController {
   //constructor Dependency Injection
   constructor(mgr) {
-    this.dal = mgr;
+    this.orderDetailService = mgr;
   }
 
-  getAll = async (req, res) => {
-    let result = await this.dal.getAll();
+  showAllOrderDetails = async (req, res) => {
+    let result = await this.orderDetailService.showAllOrderDetails();
     res.send(result);
     console.log(result);
   };
 
-  getById = async (req, res) => {
-    let result = await this.dal.getById(req);
+  showOrderDetailById = async (req, res) => {
+    let result = await this.orderDetailService.showOrderDetailById(req);
     res.send(result);
     console.log(result);
   };
 
-  post = async (req, res) => {
-    let result = await this.dal.insert(req);
+  registerNewOrderDetail = async (req, res) => {
+    let result = await this.orderDetailService.registerNewOrderDetail(req);
     console.log(result);
     res.send(result);
   };
 
-  put = async (req, res) => {
-    let result = await this.dal.update(req);
+  updateOrderDetailById = async (req, res) => {
+    let result = await this.orderDetailService.updateOrderDetailById(req);
     console.log(result);
     res.send(result);
   };
 
-  delete = async (req, res) => {
+  removeOrderDetailById = async (req, res) => {
     console.log(req.body);
-    let result = await this.dal.delete(req);
+    let result = await this.orderDetailService.removeOrderDetailById(req);
     console.log(result);
     res.send(result);
   };

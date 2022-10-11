@@ -3,7 +3,7 @@ import mysql from "./mysqlDBManager.js";
 export default class OrderManager {
   constructor() { }
 
-  insert = (req, res) => {
+  registerNewOrder = (req, res) => {
     return new Promise((resolve) => {
       var cmd = `INSERT INTO orders(status,customerid,createdat,modifiedat) values('${req.body.status}','${req.body.customerid}','${req.body.createdat}','${req.body.modifiedat}')`;
 
@@ -20,7 +20,7 @@ export default class OrderManager {
     });
   };
 
-  update = (req, res) => {
+  updateOrderById = (req, res) => {
     return new Promise((resolve) => {
       let command = `UPDATE orders SET status="${req.body.status}" WHERE id = "${req.params.id}"`;
       console.log(command);
@@ -30,9 +30,9 @@ export default class OrderManager {
     });
   };
 
-  getAll = () => {
+  showAllOrders = () => {
     return new Promise((resolve) => {
-      let command = `SELECT * FROM orders `;
+      let command = `SELECT status,customerid,createdat,modifiedat FROM orders `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -40,18 +40,18 @@ export default class OrderManager {
     });
   };
 
-  getById = (req, res) => {
+  showOrderById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `SELECT * FROM orders WHERE id="${id}"`;
+      let command = `SELECT status,customerid,createdat,modifiedat FROM orders WHERE id="${id}"`;
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
       });
     });
   };
 
-  delete = (req, res) => {
+  removeOrderById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)

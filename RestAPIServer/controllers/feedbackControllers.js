@@ -2,36 +2,36 @@
 export default class FeedbackController {
     //constructor Dependency Injection
     constructor(mgr) {
-      this.dal = mgr;
+      this.feedbackService = mgr;
     }
   
-    getAll = async (req, res) => {
-      let result = await this.dal.getAll();
+    showAllFeedbacks = async (req, res) => {
+      let result = await this.feedbackService.showAllFeedbacks();
       res.send(result);
       console.log(result);
     };
   
-    getById = async (req, res) => {
-      let result = await this.dal.getById(req);
+    showFeedbackById = async (req, res) => {
+      let result = await this.feedbackService.showFeedbackById(req);
       res.send(result);
       console.log(result);
     };
   
-    post = async (req, res) => {
-      let result = await this.dal.insert(req);
+    registerNewFeedback = async (req, res) => {
+      let result = await this.feedbackService.registerNewFeedback(req);
       console.log(result);
       res.send(result);
     };
   
-    put = async (req, res) => {
-      let result = await this.dal.update(req);
+    updateFeedbackById = async (req, res) => {
+      let result = await this.feedbackService.updateFeedbackById(req);
       console.log(result);
       res.send(result);
     };
   
-    delete = async (req, res) => {
+    removeFeedbackById = async (req, res) => {
       console.log(req.body);
-      let result = await this.dal.delete(req);
+      let result = await this.feedbackService.removeFeedbackById(req);
       console.log(result);
       res.send(result);
     };

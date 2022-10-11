@@ -2,36 +2,36 @@
 export default class DeliveryController {
   //constructor Dependency Injection
   constructor(mgr) {
-    this.dal = mgr;
+    this.deliveryService = mgr;
   }
 
-  getAll = async (req, res) => {
-    let result = await this.dal.getAll();
+  showAllDeliveries = async (req, res) => {
+    let result = await this.deliveryService.showAllDeliveries();
     res.send(result);
     console.log(result);
   };
 
-  getById = async (req, res) => {
-    let result = await this.dal.getById(req);
+  showDeliveryById = async (req, res) => {
+    let result = await this.deliveryService.showDeliveryById(req);
     res.send(result);
     console.log(result);
   };
 
-  post = async (req, res) => {
-    let result = await this.dal.insert(req);
+  registerNewDelivery = async (req, res) => {
+    let result = await this.deliveryService.registerNewDelivery(req);
     console.log(result);
     res.send(result);
   };
 
-  put = async (req, res) => {
-    let result = await this.dal.update(req);
+  updateDeliveryById = async (req, res) => {
+    let result = await this.deliveryService.updateDeliveryById(req);
     console.log(result);
     res.send(result);
   };
 
-  delete = async (req, res) => {
+  removeDeliveryById = async (req, res) => {
     console.log(req.body);
-    let result = await this.dal.delete(req);
+    let result = await this.deliveryService.removeDeliveryById(req);
     console.log(result);
     res.send(result);
   };

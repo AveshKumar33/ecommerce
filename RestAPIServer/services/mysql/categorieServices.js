@@ -3,7 +3,7 @@ import mysql from "./mysqlDBManager.js";
 export default class CategoryManager {
   constructor() { }
 
-  insert = (req, res) => {
+  registerNewCategory = (req, res) => {
     return new Promise((resolve) => {
       var cmd = `INSERT INTO categories(name,createdat,modifiedat) values('${req.body.name}','${req.body.createdat}','${req.body.modifiedat}')`;
 
@@ -20,7 +20,7 @@ export default class CategoryManager {
     });
   };
 
-  update = (req, res) => {
+  updateCategoryById = (req, res) => {
     return new Promise((resolve) => {
       let command = `UPDATE categories SET name="${req.body.name}" WHERE id = "${req.params.id}"`;
       console.log(command);
@@ -30,9 +30,9 @@ export default class CategoryManager {
     });
   };
 
-  getAll = () => {
+  showAllCategories = () => {
     return new Promise((resolve) => {
-      let command = `SELECT * FROM categories `;
+      let command = `SELECT name,createdat,modifiedat FROM categories `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -40,18 +40,18 @@ export default class CategoryManager {
     });
   };
 
-  getById = (req, res) => {
+  showCategoryById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `SELECT * FROM categories WHERE id="${id}"`;
+      let command = `SELECT name,createdat,modifiedat FROM categories WHERE id="${id}"`;
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
       });
     });
   };
 
-  delete = (req, res) => {
+  removeCategoyById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)

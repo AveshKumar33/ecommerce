@@ -3,7 +3,7 @@ import mysql from "./mysqlDBManager.js";
 export default class ProductManager {
   constructor() { }
 
-  insert = (req, res, next) => {
+  registerNewProduct = (req, res, next) => {
     return new Promise((resolve) => {
       var cmd = `INSERT INTO products(title,description,imageurl,quantity,price,categoryid,sellerid,createdat,modifiedat)
        values('${req.body.title}',
@@ -25,7 +25,7 @@ export default class ProductManager {
     });
   };
 
-  update = (req, res) => {
+  updateProductById = (req, res) => {
     return new Promise((resolve) => {
       let command = `UPDATE products SET quantity="${req.body.quantity}",price="${req.body.price}" WHERE id = "${req.params.id}"`;
       console.log(command);
@@ -35,9 +35,9 @@ export default class ProductManager {
     });
   };
 
-  getAll = () => {
+  showAllProducts = () => {
     return new Promise((resolve) => {
-      let command = `SELECT * FROM products `;
+      let command = `SELECT title,description,imageurl,quantity,price,categoryid,sellerid,createdat,modifiedat FROM products `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -45,18 +45,18 @@ export default class ProductManager {
     });
   };
 
-  getById = (req, res) => {
+  showProductById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `SELECT * FROM products WHERE id="${id}"`;
+      let command = `SELECT title,description,imageurl,quantity,price,categoryid,sellerid,createdat,modifiedat FROM products WHERE id="${id}"`;
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
       });
     });
   };
 
-  delete = (req, res) => {
+  deleremoveProductByIdte = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)

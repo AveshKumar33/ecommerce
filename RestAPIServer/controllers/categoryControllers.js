@@ -2,36 +2,36 @@
 export default class CategoryController {
     //constructor Dependency Injection
     constructor(mgr) {
-      this.dal = mgr;
+      this.categoryService = mgr;
     }
   
-    getAll = async (req, res) => {
-      let result = await this.dal.getAll();
+    showAllCategories = async (req, res) => {
+      let result = await this.categoryService.showAllCategories();
       res.send(result);
       console.log(result);
     };
   
-    getById = async (req, res) => {
-      let result = await this.dal.getById(req);
+    showCategoryById = async (req, res) => {
+      let result = await this.categoryService.showCategoryById(req);
       res.send(result);
       console.log(result);
     };
   
-    post = async (req, res) => {
-      let result = await this.dal.insert(req);
+    registerNewCategory = async (req, res) => {
+      let result = await this.categoryService.registerNewCategory(req);
       console.log(result);
       res.send(result);
     };
   
-    put = async (req, res) => {
-      let result = await this.dal.update(req);
+    updateCategoryById = async (req, res) => {
+      let result = await this.categoryService.updateCategoryById(req);
       console.log(result);
       res.send(result);
     };
   
-    delete = async (req, res) => {
+    removeCategoyById = async (req, res) => {
       console.log(req.body);
-      let result = await this.dal.delete(req);
+      let result = await this.categoryService.removeCategoyById(req);
       console.log(result);
       res.send(result);
     };

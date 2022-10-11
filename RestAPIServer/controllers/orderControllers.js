@@ -2,43 +2,43 @@
 export default class OrderController {
   //constructor Dependency Injection
   constructor(mgr) {
-    this.dal = mgr;
+    this.orderService = mgr;
   }
 
-  getAll = async (req, res) => {
-    let result = await this.dal.getAll();
+  showAllOrders = async (req, res) => {
+    let result = await this.orderService.showAllOrders();
     res.send(result);
     console.log(result);
   };
 
-  getById = async (req, res) => {
-    let result = await this.dal.getById(req);
+  showOrderById = async (req, res) => {
+    let result = await this.orderService.showOrderById(req);
     res.send(result);
     console.log(result);
   };
 
-  post = async (req, res) => {
-    let result = await this.dal.insert(req);
+  registerNewOrder = async (req, res) => {
+    let result = await this.orderService.registerNewOrder(req);
     console.log(result);
     res.send(result);
   };
 
-  put = async (req, res) => {
-    let result = await this.dal.update(req);
+  updateOrderById = async (req, res) => {
+    let result = await this.orderService.updateOrderById(req);
     console.log(result);
     res.send(result);
   };
 
-  delete = async (req, res) => {
+  removeOrderById = async (req, res) => {
     console.log(req.body);
-    let result = await this.dal.delete(req);
+    let result = await this.orderService.removeOrderById(req);
     console.log(result);
     res.send(result);
   };
   topTenOrders = async (req, res) => {
     
     let data = [];
-    data = await dal.topTenOrders();
+    data = await orderService.topTenOrders();
     console.log('top ten orders');
     res.send(data);
   };

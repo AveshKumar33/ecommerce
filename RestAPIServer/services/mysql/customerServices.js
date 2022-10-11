@@ -3,9 +3,9 @@ import mysql from "./mysqlDBManager.js";
 export default class CustomerManager {
   constructor() { }
 
-  insert = (req, res) => {
+  registerNewCustomer = (req, res) => {
     return new Promise((resolve) => {
-      var cmd = `INSERT INTO customers(userid,firstname,lastname,contactno,location,createdat,modifiedat) values('${req.body.userid}','${req.body.firstname}',\n" +"
+      var cmd = `INSERT INTO customers(firstname,lastname,contactno,location,createdat,modifiedat) values('${req.body.firstname}',\n" +"
       '${req.body.lastname}','${req.body.contactno}','${req.body.location}','${req.body.createdat}','${req.body.modifiedat}')`;
 
       console.log(cmd);
@@ -21,7 +21,7 @@ export default class CustomerManager {
     });
   };
 
-  update = (req, res) => {
+  updateCustomerById = (req, res) => {
     return new Promise((resolve) => {
       let command = `UPDATE customers SET contactno="${req.body.contactno}",location="${req.body.location}" WHERE id = "${req.params.id}"`;
       console.log(command);
@@ -31,9 +31,9 @@ export default class CustomerManager {
     });
   };
 
-  getAll = () => {
+  showAllCustomers = () => {
     return new Promise((resolve) => {
-      let command = `SELECT * FROM customers `;
+      let command = `SELECT firstname,lastname,contactno,location,createdat,modifiedat FROM customers `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -41,18 +41,18 @@ export default class CustomerManager {
     });
   };
 
-  getById = (req, res) => {
+  showCustomerById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `SELECT * FROM customers WHERE id="${id}"`;
+      let command = `SELECT firstname,lastname,contactno,location,createdat,modifiedat FROM customers WHERE id="${id}"`;
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
       });
     });
   };
 
-  delete = (req, res) => {
+  removeCustomerById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)

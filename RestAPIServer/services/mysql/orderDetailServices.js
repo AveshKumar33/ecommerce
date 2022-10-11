@@ -3,7 +3,7 @@ import mysql from "./mysqlDBManager.js";
 export default class OrderDetailManager {
   constructor() { }
 
-  insert = (req, res) => {
+  registerNewOrderDetail = (req, res) => {
     return new Promise((resolve) => {
       var cmd = `INSERT INTO orderDetails(quantity,price,orderid,productid,createdat,modifiedat) values('${req.body.quantity}',\n"+"
       '${req.body.price}','${req.body.orderid}','${req.body.productid}','${req.body.createdat}','${req.body.modifiedat}')`;
@@ -21,7 +21,7 @@ export default class OrderDetailManager {
     });
   };
 
-  update = (req, res) => {
+  updateOrderDetailById = (req, res) => {
     return new Promise((resolve) => {
       let command = `UPDATE orderDetails SET price="${req.body.price}",quantity="${req.body.quantity}" WHERE id = "${req.params.id}"`;
       console.log(command);
@@ -31,9 +31,9 @@ export default class OrderDetailManager {
     });
   };
 
-  getAll = () => {
+  showAllOrderDetails = () => {
     return new Promise((resolve) => {
-      let command = `SELECT * FROM orderdetails `;
+      let command = `SELECT quantity,price,orderid,productid,createdat,modifiedat FROM orderdetails `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -41,18 +41,18 @@ export default class OrderDetailManager {
     });
   };
 
-  getById = (req, res) => {
+  showOrderDetailById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `SELECT * FROM orderDetails WHERE id="${id}"`;
+      let command = `SELECT quantity,price,orderid,productid,createdat,modifiedat FROM orderDetails WHERE id="${id}"`;
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
       });
     });
   };
 
-  delete = (req, res) => {
+  removeOrderDetailById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)

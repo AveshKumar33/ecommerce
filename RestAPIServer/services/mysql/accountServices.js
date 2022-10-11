@@ -3,7 +3,7 @@ import mysql from "./mysqlDBManager.js";
 export default class AccountManager {
   constructor() { }
 
-  insert = (req, res) => {
+  registerNewAccount = (req, res) => {
     return new Promise((resolve) => {
       var cmd = `INSERT INTO accounts(accountnumber,balance,userid,createdat,modifiedat) values('${req.body.accountnumber}','${req.body.balance}','${req.body.userid}','${req.body.createdat}','${req.body.modifiedat}')`;
 
@@ -30,9 +30,9 @@ export default class AccountManager {
     });
   };
 
-  getAll = () => {
+  showAllAccounts = () => {
     return new Promise((resolve) => {
-      let command = `SELECT * FROM accounts `;
+      let command = `SELECT accountnumber,balance,userid,createdat,modifiedat FROM accounts `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -40,18 +40,18 @@ export default class AccountManager {
     });
   };
 
-  getById = (req, res) => {
+  showAccountById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `SELECT * FROM accounts WHERE id="${id}"`;
+      let command = `SELECT accountnumber,balance,userid,createdat,modifiedat FROM accounts WHERE id="${id}"`;
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
       });
     });
   };
 
-  delete = (req, res) => {
+  removeAccountById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)

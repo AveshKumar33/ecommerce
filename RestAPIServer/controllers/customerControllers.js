@@ -2,36 +2,36 @@
 export default class CustomerController {
   //constructor Dependency Injection
   constructor(mgr) {
-    this.dal = mgr;
+    this.customerService = mgr;
   }
 
-  getAll = async (req, res) => {
-    let result = await this.dal.getAll();
+  showAllCustomers = async (req, res) => {
+    let result = await this.customerService.showAllCustomers();
     res.send(result);
     console.log(result);
   };
 
-  getById = async (req, res) => {
-    let result = await this.dal.getById(req);
+  showCustomerById = async (req, res) => {
+    let result = await this.customerService.showCustomerById(req);
     res.send(result);
     console.log(result);
   };
 
-  post = async (req, res) => {
-    let result = await this.dal.insert(req);
+  registerNewCustomer = async (req, res) => {
+    let result = await this.customerService.registerNewCustomer(req);
     console.log(result);
     res.send(result);
   };
 
-  put = async (req, res) => {
-    let result = await this.dal.update(req);
+  updateCustomerById = async (req, res) => {
+    let result = await this.customerService.updateCustomerById(req);
     console.log(result);
     res.send(result);
   };
 
-  delete = async (req, res) => {
+  removeCustomerById = async (req, res) => {
     console.log(req.body);
-    let result = await this.dal.delete(req);
+    let result = await this.customerService.removeCustomerById(req);
     console.log(result);
     res.send(result);
   };

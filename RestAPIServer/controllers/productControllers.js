@@ -2,36 +2,36 @@
 export default class ProductController {
   //constructor Dependency Injection
   constructor(mgr) {
-    this.dal = mgr;
+    this.productService = mgr;
   }
 
-  getAll = async (req, res) => {
-    let result = await this.dal.getAll();
+  showAllProducts = async (req, res) => {
+    let result = await this.productService.showAllProducts();
     res.send(result);
     console.log(result);
   };
 
-  getById = async (req, res) => {
-    let result = await this.dal.getById(req);
+  showProductById = async (req, res) => {
+    let result = await this.productService.showProductById(req);
     res.send(result);
     console.log(result);
   };
 
-  post = async (req, res,next) => {
-    let result = await this.dal.insert(req);
+  registerNewProduct = async (req, res,next) => {
+    let result = await this.productService.registerNewProduct(req);
     console.log(result);
     res.send(result);
   };
 
-  put = async (req, res) => {
-    let result = await this.dal.update(req);
+  updateProductById = async (req, res) => {
+    let result = await this.productService.updateProductById(req);
     console.log(result);
     res.send(result);
   };
 
-  delete = async (req, res) => {
+  removeProductById = async (req, res) => {
     console.log(req.body);
-    let result = await this.dal.delete(req);
+    let result = await this.productService.removeProductById(req);
     console.log(result);
     res.send(result);
   };

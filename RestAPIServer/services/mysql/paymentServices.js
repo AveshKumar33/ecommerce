@@ -3,7 +3,7 @@ import mysql from "./mysqlDBManager.js";
 export default class PaymentManager {
   constructor() { }
 
-  insert = (req, res) => {
+  registerNewPayment = (req, res) => {
     return new Promise((resolve) => {
       var cmd = `INSERT INTO payments(totalamount,discountpercentage,payableamount,orderid,modeofpayment,createdat,modifiedat) values('${req.body.totalamount}',\n"+"
       '${req.body.discountpercentage}','${req.body.payableamount}','${req.body.orderid}','${req.body.modeofpayment}','${req.body.createdat}','${req.body.modifiedat}')`;
@@ -21,7 +21,7 @@ export default class PaymentManager {
     });
   };
 
-  update = (req, res) => {
+  updatePaymentById = (req, res) => {
     return new Promise((resolve) => {
       let command = `UPDATE payments SET discountpercentage="${req.body.discountpercentage}" WHERE orderid = "${req.params.orderid}"`;
       console.log(command);
@@ -31,9 +31,9 @@ export default class PaymentManager {
     });
   };
 
-  getAll = () => {
+  showAllPayments = () => {
     return new Promise((resolve) => {
-      let command = `SELECT * FROM payments `;
+      let command = `SELECT totalamount,discountpercentage,payableamount,orderid,modeofpayment,createdat,modifiedat FROM payments `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -41,18 +41,18 @@ export default class PaymentManager {
     });
   };
 
-  getById = (req, res) => {
+  showPaymentById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `SELECT * FROM payments WHERE id="${id}"`;
+      let command = `SELECT totalamount,discountpercentage,payableamount,orderid,modeofpayment,createdat,modifiedat FROM payments WHERE id="${id}"`;
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
       });
     });
   };
 
-  delete = (req, res) => {
+  removePaymentById = (req, res) => {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)

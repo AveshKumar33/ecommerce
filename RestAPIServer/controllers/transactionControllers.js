@@ -2,36 +2,36 @@
 export default class TransactionController {
     //constructor Dependency Injection
     constructor(mgr) {
-      this.dal = mgr;
+      this.transactionService = mgr;
     }
   
-    getAll = async (req, res) => {
-      let result = await this.dal.getAll();
+    showAllTransactions = async (req, res) => {
+      let result = await this.transactionService.showAllTransactions();
       res.send(result);
       console.log(result);
     };
   
-    getById = async (req, res) => {
-      let result = await this.dal.getById(req);
+    showTransactionById = async (req, res) => {
+      let result = await this.transactionService.showTransactionById(req);
       res.send(result);
       console.log(result);
     };
   
-    post = async (req, res) => {
-      let result = await this.dal.insert(req);
+    registerNewTransaction = async (req, res) => {
+      let result = await this.transactionService.insert(req);
       console.log(result);
       res.send(result);
     };
   
-    put = async (req, res) => {
-      let result = await this.dal.update(req);
+    updateTransactionById = async (req, res) => {
+      let result = await this.transactionService.update(req);
       console.log(result);
       res.send(result);
     };
   
-    delete = async (req, res) => {
+    removeTransactionById = async (req, res) => {
       console.log(req.body);
-      let result = await this.dal.delete(req);
+      let result = await this.transactionService.removeTransactionById(req);
       console.log(result);
       res.send(result);
     };

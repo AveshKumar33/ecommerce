@@ -44,7 +44,7 @@ app.get('/api/removefromcart/:id', (req, res) => {
     res.end();
 });
 //to close session
-app.get('/api/cheackout', (req, res) => {
+app.get('/api/checkout', (req, res) => {
     req.session.destroy((err) => {
         res.send('session destroyed');
         res.end();
