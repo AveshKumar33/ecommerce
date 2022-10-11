@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import mysql from "./mysqldbmgr.js";
+import mysql from "./mysqlDBManager.js";
 export default class UserManager {
   constructor() { }
 

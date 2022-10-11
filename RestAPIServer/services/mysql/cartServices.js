@@ -1,5 +1,5 @@
 
-import mysql from "./mysqldbmgr.js";
+import mysql from "./mysqlDBManager.js";
 export default class CartManager {
   constructor() { }
 

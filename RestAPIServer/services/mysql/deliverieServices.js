@@ -1,12 +1,12 @@
 
-import mysql from "./mysqldbmgr.js";
-export default class PaymentManager {
+import mysql from "./mysqlDBManager.js";
+export default class DeliveryManager {
   constructor() { }
 
   insert = (req, res) => {
     return new Promise((resolve) => {
-      var cmd = `INSERT INTO payments(totalamount,discountpercentage,payableamount,orderid,modeofpayment,createdat,modifiedat) values('${req.body.totalamount}',\n"+"
-      '${req.body.discountpercentage}','${req.body.payableamount}','${req.body.orderid}','${req.body.modeofpayment}','${req.body.createdat}','${req.body.modifiedat}')`;
+      var cmd = `INSERT INTO deliveries(orderid,vendorid,location,createdat,modifiedat) values('${req.body.orderid}','${req.body.vendorid}',\n"+"
+      '${req.body.location}','${req.body.modifiedat}','${req.body.createdat}')`;
 
       console.log(cmd);
       mysql.query(cmd, (err, rows, fields) => {
@@ -23,7 +23,7 @@ export default class PaymentManager {
 
   update = (req, res) => {
     return new Promise((resolve) => {
-      let command = `UPDATE payments SET discountpercentage="${req.body.discountpercentage}" WHERE orderid = "${req.params.orderid}"`;
+      let command = `UPDATE deliveries SET vendorid="${req.body.vendorid}",location="${req.body.location}" WHERE id = "${req.params.id}"`;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -33,7 +33,7 @@ export default class PaymentManager {
 
   getAll = () => {
     return new Promise((resolve) => {
-      let command = `SELECT * FROM payments `;
+      let command = `SELECT * FROM deliveries `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -45,7 +45,7 @@ export default class PaymentManager {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `SELECT * FROM payments WHERE id="${id}"`;
+      let command = `SELECT * FROM deliveries WHERE id="${id}"`;
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
       });
@@ -56,22 +56,11 @@ export default class PaymentManager {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `DELETE FROM payments WHERE id="${id}"`;
+      let command = `DELETE  FROM deliveries WHERE id="${id}"`;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
       });
     });
   };
-  
-  // topTenOrders = () => {
-  //   return new Promise((resolve) => {
-  //     let command = `select orderid,count(*) mostPaymentsOnOrders from payments group by orderid order by mostPaymentsOnOrders desc limit 10; `;
-  //     console.log(command);
-  //     mysql.query(command, (err, rows, fields) => {
-  //       resolve(rows);
-  //     });
-  //   });
-  // };
-
 }

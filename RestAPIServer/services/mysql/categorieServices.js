@@ -1,12 +1,11 @@
 
-import mysql from "./mysqldbmgr.js";
-export default class OrderDetailManager {
+import mysql from "./mysqlDBManager.js";
+export default class CategoryManager {
   constructor() { }
 
   insert = (req, res) => {
     return new Promise((resolve) => {
-      var cmd = `INSERT INTO orderDetails(quantity,price,orderid,productid,createdat,modifiedat) values('${req.body.quantity}',\n"+"
-      '${req.body.price}','${req.body.orderid}','${req.body.productid}','${req.body.createdat}','${req.body.modifiedat}')`;
+      var cmd = `INSERT INTO categories(name,createdat,modifiedat) values('${req.body.name}','${req.body.createdat}','${req.body.modifiedat}')`;
 
       console.log(cmd);
       mysql.query(cmd, (err, rows, fields) => {
@@ -23,7 +22,7 @@ export default class OrderDetailManager {
 
   update = (req, res) => {
     return new Promise((resolve) => {
-      let command = `UPDATE orderDetails SET price="${req.body.price}",quantity="${req.body.quantity}" WHERE id = "${req.params.id}"`;
+      let command = `UPDATE categories SET name="${req.body.name}" WHERE id = "${req.params.id}"`;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -33,7 +32,7 @@ export default class OrderDetailManager {
 
   getAll = () => {
     return new Promise((resolve) => {
-      let command = `SELECT * FROM orderdetails `;
+      let command = `SELECT * FROM categories `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -45,7 +44,7 @@ export default class OrderDetailManager {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `SELECT * FROM orderDetails WHERE id="${id}"`;
+      let command = `SELECT * FROM categories WHERE id="${id}"`;
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
       });
@@ -56,7 +55,7 @@ export default class OrderDetailManager {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `DELETE FROM users WHERE id="${id}"`;
+      let command = `DELETE FROM categories WHERE id="${id}"`;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);

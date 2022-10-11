@@ -1,36 +1,36 @@
 import UserController from '../controllers/userControllers.js';
-import UserManager from '../services/mysql/usersDal.js';
+import UserManager from '../services/mysql/userServices.js';
 import AccountController from '../controllers/accountControllers.js';
-import AccountManager from '../services/mysql/accountsDal.js';
+import AccountManager from '../services/mysql/accountServices.js';
 import CartController from '../controllers/cartControllers.js';
-import CartManager from '../services/mysql/cartsDal.js';
+import CartManager from '../services/mysql/cartServices.js';
 import CategoryController from '../controllers/categoryControllers.js';
-import CategoryManager from '../services/mysql/categoriesDal.js';
+import CategoryManager from '../services/mysql/categorieServices.js';
 import CustomerController from '../controllers/customerControllers.js';
-import CustomerManager from '../services/mysql/customersDal.js';
+import CustomerManager from '../services/mysql/customerServices.js';
 import DeliveryController from '../controllers/deliveryControllers.js';
-import DeliveryManager from '../services/mysql/deliveriesDal.js';
+import DeliveryManager from '../services/mysql/deliverieServices.js';
 import FeedbackController from '../controllers/feedbackControllers.js';
-import FeedbackManager from '../services/mysql/feedbacksDal.js';
+import FeedbackManager from '../services/mysql/feedbackServices.js';
 import OrderDetailController from '../controllers/orderDetailsControllers.js';
-import OrderDetailManager from '../services/mysql/orderDetailsDal.js';
+import OrderDetailManager from '../services/mysql/orderDetailServices.js';
 import OrderController from '../controllers/orderControllers.js';
-import OrderManager from '../services/mysql/ordersDal.js';
+import OrderManager from '../services/mysql/orderServices.js';
 import PaymentController from '../controllers/paymentControllers.js';
-import PaymentManager from '../services/mysql/paymentsDal.js';
+import PaymentManager from '../services/mysql/paymentServices.js';
 import ProductController from '../controllers/productControllers.js';
-import ProductManager from '../services/mysql/productsDal.js';
+import ProductManager from '../services/mysql/productServices.js';
 import SellerController from '../controllers/sellerControllers.js';
-import SellerManager from '../services/mysql/sellersDal.js';
+import SellerManager from '../services/mysql/sellerServices.js';
 import StaffController from '../controllers/staffControllers.js';
-import StaffManager from '../services/mysql/staffsDal.js';
+import StaffManager from '../services/mysql/staffServices.js';
 import TransactionController from '../controllers/transactionControllers.js';
-import TransactionManager from '../services/mysql/transactionsDal.js';
+import TransactionManager from '../services/mysql/transactionServices.js';
 import VendorController from '../controllers/vendorControllers.js';
-import VendorManager from '../services/mysql/vendorsDal.js';
+import VendorManager from '../services/mysql/vendorServices.js';
 import FundController from '../controllers/fundTransactionControllers.js';
-import FundManager from '../services/mysql/fundTransactionDal.js';
-import User from '../services/middleware/user.js';
+import FundManager from '../services/mysql/fundTransactionServices.js';
+import User from '../services/middlewares/user.js';
 
 
 export default function (app) {
@@ -38,12 +38,12 @@ export default function (app) {
    var vendorMgr = new VendorManager();
    var vendorController = new VendorController(vendorMgr);
    app.route("/api/vendors")
-      .get(vendorController.getAll)
-      .post(vendorController.post);
+      .get(vendorController.showAllVendors)
+      .post(vendorController.registerNewVendor);
    app.route("/api/vendors/:id")
-      .get(vendorController.getById)
-      .delete(vendorController.delete)
-      .put(vendorController.put);
+      .get(vendorController.showVendorById)
+      .delete(vendorController.removeVendorById)
+      .put(vendorController.updateVendorById);
    //====================== for transactions========================================>    
    var transactionMgr = new TransactionManager();
    var transactionController = new TransactionController(transactionMgr);

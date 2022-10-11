@@ -1,12 +1,12 @@
 
-import mysql from "./mysqldbmgr.js";
-export default class CustomerManager {
+import mysql from "./mysqlDBManager.js";
+export default class FeedbackManager {
   constructor() { }
 
   insert = (req, res) => {
     return new Promise((resolve) => {
-      var cmd = `INSERT INTO customers(userid,firstname,lastname,contactno,location,createdat,modifiedat) values('${req.body.userid}','${req.body.firstname}',\n" +"
-      '${req.body.lastname}','${req.body.contactno}','${req.body.location}','${req.body.createdat}','${req.body.modifiedat}')`;
+      var cmd = `INSERT INTO feedbacks(imageurl,productid,customerid,description,createdat,modifiedat) values('${req.body.imageurl}',\n"+"
+      '${req.body.productid}','${req.body.customerid}','${req.body.description}','${req.body.createdat}','${req.body.modifiedat}')`;
 
       console.log(cmd);
       mysql.query(cmd, (err, rows, fields) => {
@@ -23,7 +23,7 @@ export default class CustomerManager {
 
   update = (req, res) => {
     return new Promise((resolve) => {
-      let command = `UPDATE customers SET contactno="${req.body.contactno}",location="${req.body.location}" WHERE id = "${req.params.id}"`;
+      let command = `UPDATE feedbacks SET description="${req.body.description}",customerid = "${req.params.customerid}" WHERE id = "${req.params.id}"`;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -33,7 +33,7 @@ export default class CustomerManager {
 
   getAll = () => {
     return new Promise((resolve) => {
-      let command = `SELECT * FROM customers `;
+      let command = `SELECT * FROM feedbacks `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -45,7 +45,7 @@ export default class CustomerManager {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `SELECT * FROM customers WHERE id="${id}"`;
+      let command = `SELECT * FROM feedbacks WHERE id="${id}"`;
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
       });
@@ -56,7 +56,7 @@ export default class CustomerManager {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `DELETE  FROM customers WHERE id="${id}"`;
+      let command = `DELETE FROM feedbacks WHERE id="${id}"`;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);

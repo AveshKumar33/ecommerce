@@ -1,12 +1,11 @@
 
-import mysql from "./mysqldbmgr.js";
-export default class SellerManager {
+import mysql from "./mysqlDBManager.js";
+export default class AccountManager {
   constructor() { }
 
   insert = (req, res) => {
     return new Promise((resolve) => {
-      var cmd = `INSERT INTO sellers(userid,name,contactno,location,createdat,modifiedat) values('${req.body.userid}',\n"+"
-      '${req.body.name}','${req.body.contactno}','${req.body.createdat}','${req.body.modifiedat}','${req.body.location}')`;
+      var cmd = `INSERT INTO accounts(accountnumber,balance,userid,createdat,modifiedat) values('${req.body.accountnumber}','${req.body.balance}','${req.body.userid}','${req.body.createdat}','${req.body.modifiedat}')`;
 
       console.log(cmd);
       mysql.query(cmd, (err, rows, fields) => {
@@ -23,7 +22,7 @@ export default class SellerManager {
 
   update = (req, res) => {
     return new Promise((resolve) => {
-      let command = `UPDATE sellers SET contactno="${req.body.contactno}",location="${req.body.location}" WHERE id = "${req.params.id}"`;
+      let command = `UPDATE accounts SET balance="${req.body.balance}" WHERE accountnumber = "${req.params.accountnumber}"`;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -33,7 +32,7 @@ export default class SellerManager {
 
   getAll = () => {
     return new Promise((resolve) => {
-      let command = `SELECT * FROM sellers `;
+      let command = `SELECT * FROM accounts `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -45,7 +44,7 @@ export default class SellerManager {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `SELECT * FROM sellers WHERE id="${id}"`;
+      let command = `SELECT * FROM accounts WHERE id="${id}"`;
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
       });
@@ -56,7 +55,7 @@ export default class SellerManager {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `DELETE FROM sellers WHERE id="${id}"`;
+      let command = `DELETE FROM accounts WHERE id="${id}"`;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);

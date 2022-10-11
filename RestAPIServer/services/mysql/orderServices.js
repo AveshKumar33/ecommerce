@@ -1,12 +1,11 @@
 
-import mysql from "./mysqldbmgr.js";
-export default class DeliveryManager {
+import mysql from "./mysqlDBManager.js";
+export default class OrderManager {
   constructor() { }
 
   insert = (req, res) => {
     return new Promise((resolve) => {
-      var cmd = `INSERT INTO deliveries(orderid,vendorid,location,createdat,modifiedat) values('${req.body.orderid}','${req.body.vendorid}',\n"+"
-      '${req.body.location}','${req.body.modifiedat}','${req.body.createdat}')`;
+      var cmd = `INSERT INTO orders(status,customerid,createdat,modifiedat) values('${req.body.status}','${req.body.customerid}','${req.body.createdat}','${req.body.modifiedat}')`;
 
       console.log(cmd);
       mysql.query(cmd, (err, rows, fields) => {
@@ -23,7 +22,7 @@ export default class DeliveryManager {
 
   update = (req, res) => {
     return new Promise((resolve) => {
-      let command = `UPDATE deliveries SET vendorid="${req.body.vendorid}",location="${req.body.location}" WHERE id = "${req.params.id}"`;
+      let command = `UPDATE orders SET status="${req.body.status}" WHERE id = "${req.params.id}"`;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -33,7 +32,7 @@ export default class DeliveryManager {
 
   getAll = () => {
     return new Promise((resolve) => {
-      let command = `SELECT * FROM deliveries `;
+      let command = `SELECT * FROM orders `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
@@ -45,7 +44,7 @@ export default class DeliveryManager {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `SELECT * FROM deliveries WHERE id="${id}"`;
+      let command = `SELECT * FROM orders WHERE id="${id}"`;
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
       });
@@ -56,7 +55,18 @@ export default class DeliveryManager {
     return new Promise((resolve) => {
       let id = req.params.id;
       console.log(id)
-      let command = `DELETE  FROM deliveries WHERE id="${id}"`;
+      let command = `DELETE FROM orders WHERE id="${id}"`;
+      console.log(command);
+      mysql.query(command, (err, rows, fields) => {
+        resolve(rows);
+      });
+    });
+  };
+  topTenOrders = () => {
+    console.log('order dal')
+    return new Promise((resolve) => {
+    
+      let command = `select orderid,count(*) mostPaymentsOnOrders from payments group by orderid order by mostPaymentsOnOrders desc limit 10 `;
       console.log(command);
       mysql.query(command, (err, rows, fields) => {
         resolve(rows);
