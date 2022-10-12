@@ -30,6 +30,7 @@ export default class AccountService {
     });
   };
 
+  
   showAllAccounts = () => {
     return new Promise((resolve) => {
       let command = `SELECT accountnumber,balance,userid,createdat,modifiedat FROM accounts `;
