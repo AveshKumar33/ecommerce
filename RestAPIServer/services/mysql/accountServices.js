@@ -1,6 +1,6 @@
 
 import mysql from "./mysqlDBManager.js";
-export default class AccountManager {
+export default class AccountService {
   constructor() { }
 
   registerNewAccount = (req, res) => {

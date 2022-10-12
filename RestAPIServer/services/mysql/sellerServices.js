@@ -1,6 +1,6 @@
 
 import mysql from "./mysqlDBManager.js";
-export default class SellerManager {
+export default class SellerService {
   constructor() { }
 
   registerNewSeller = (req, res) => {

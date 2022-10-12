@@ -381,7 +381,7 @@ function fundTransactions() {
     credentials.fromaccount = fromaccount;
     credentials.toaccount = toaccount;
     credentials.amount = amount;
-    let loginUrl = "//localhost:11000/api/fundTransactions";
+    let loginUrl = "//localhost:11000/api/fundtransactions";
     //  console.log(credentials)
 
     $.ajax({

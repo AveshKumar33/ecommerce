@@ -1,45 +1,60 @@
 import UserController from '../controllers/userControllers.js';
-import UserManager from '../services/mysql/userServices.js';
+import UserService from '../services/mysql/userServices.js';
+
 import AccountController from '../controllers/accountControllers.js';
-import AccountManager from '../services/mysql/accountServices.js';
+import AccountService from '../services/mysql/accountServices.js';
+
 //import CartController from '../controllers/cartControllers.js';
 //import CartManager from '../services/mysql/cartServices.js';
+
 import CategoryController from '../controllers/categoryControllers.js';
-import CategoryManager from '../services/mysql/categorieServices.js';
+import CategoryService from '../services/mysql/categorieServices.js';
+
 import CustomerController from '../controllers/customerControllers.js';
-import CustomerManager from '../services/mysql/customerServices.js';
+import CustomerService from '../services/mysql/customerServices.js';
+
 import DeliveryController from '../controllers/deliveryControllers.js';
-import DeliveryManager from '../services/mysql/deliverieServices.js';
+import DeliveryService from '../services/mysql/deliverieServices.js';
+
 import FeedbackController from '../controllers/feedbackControllers.js';
-import FeedbackManager from '../services/mysql/feedbackServices.js';
+import FeedbackService from '../services/mysql/feedbackServices.js';
+
 import OrderDetailController from '../controllers/orderDetailsControllers.js';
-import OrderDetailManager from '../services/mysql/orderDetailServices.js';
+import OrderDetailService from '../services/mysql/orderDetailServices.js';
+
 import OrderController from '../controllers/orderControllers.js';
-import OrderManager from '../services/mysql/orderServices.js';
+import OrderService from '../services/mysql/orderServices.js';
+
 import PaymentController from '../controllers/paymentControllers.js';
-import PaymentManager from '../services/mysql/paymentServices.js';
+import PaymentService from '../services/mysql/paymentServices.js';
+
 import ProductController from '../controllers/productControllers.js';
-import ProductManager from '../services/mysql/productServices.js';
+import ProductService from '../services/mysql/productServices.js';
+
 import SellerController from '../controllers/sellerControllers.js';
-import SellerManager from '../services/mysql/sellerServices.js';
+import SellerService from '../services/mysql/sellerServices.js';
+
 import StaffController from '../controllers/staffControllers.js';
-import StaffManager from '../services/mysql/staffServices.js';
+import StaffService from '../services/mysql/staffServices.js';
+
 import TransactionController from '../controllers/transactionControllers.js';
-import TransactionManager from '../services/mysql/transactionServices.js';
+import TransactionService from '../services/mysql/transactionServices.js';
+
 import VendorController from '../controllers/vendorControllers.js';
-import VendorManager from '../services/mysql/vendorServices.js';
+import VendorService from '../services/mysql/vendorServices.js';
+
 import FundController from '../controllers/fundTransactionControllers.js';
-import FundManager from '../services/mysql/fundTransactionServices.js';
+import FundTransactionService from '../services/mysql/fundTransactionServices.js';
 
 import DashboardController from '../controllers/dashboard/dashboardControllers.js';
-import DashboardManager from '../services/mysql/dashboardServices.js';
+import DashboardService from '../services/mysql/dashboardServices.js';
 
 import User from '../services/middlewares/user.js';
 
 
 export default function (app) {
    //==========================for  my dashboards===============================================================>
-   var dashboardMgr = new DashboardManager();
+   var dashboardMgr = new DashboardService();
    var dashboardController = new DashboardController(dashboardMgr);
 
    app.route("/api/orders/topten")
@@ -72,7 +87,7 @@ export default function (app) {
       .get(dashboardController.staffProfile);
 
    //====================== for vendorss========================================>    
-   var vendorMgr = new VendorManager();
+   var vendorMgr = new VendorService();
    var vendorController = new VendorController(vendorMgr);
    app.route("/api/vendors")
       .get(vendorController.showAllVendors)
@@ -82,7 +97,7 @@ export default function (app) {
       .delete(vendorController.removeVendorById)
       .put(vendorController.updateVendorById);
    //====================== for transactions========================================>    
-   var transactionMgr = new TransactionManager();
+   var transactionMgr = new TransactionService();
    var transactionController = new TransactionController(transactionMgr);
    app.route("/api/transactions")
       .get(transactionController.showAllTransactions)
@@ -92,7 +107,7 @@ export default function (app) {
       .delete(transactionController.removeTransactionById)
       .put(transactionController.updateTransactionById);
    //====================== for staffs========================================>    
-   var staffMgr = new StaffManager();
+   var staffMgr = new StaffService();
    var staffController = new StaffController(staffMgr);
    app.route("/api/staffs")
       .get(staffController.showAllStaffs)
@@ -102,7 +117,7 @@ export default function (app) {
       .delete(staffController.removeStaffById)
       .put(staffController.updateStaffById);
    //====================== for sellers========================================>    
-   var sellerMgr = new SellerManager();
+   var sellerMgr = new SellerService();
    var sellerController = new SellerController(sellerMgr);
    app.route("/api/sellers")
       .get(sellerController.showAllSellers)
@@ -112,7 +127,7 @@ export default function (app) {
       .delete(sellerController.removeSellerById)
       .put(sellerController.updateSellerById);
    //====================== for products========================================>    
-   var productMgr = new ProductManager();
+   var productMgr = new ProductService();
    var productController = new ProductController(productMgr);
    app.route("/api/products")
       .get(productController.showAllProducts);
@@ -125,7 +140,7 @@ export default function (app) {
       .delete(productController.removeProductById)
       .put(productController.updateProductById);
    //====================== for payments========================================>    
-   var paymentMgr = new PaymentManager();
+   var paymentMgr = new PaymentService();
    var paymentController = new PaymentController(paymentMgr);
    app.route("/api/payments")
       .get(paymentController.showAllPayments)
@@ -135,7 +150,7 @@ export default function (app) {
       .delete(paymentController.removePaymentById)
       .put(paymentController.updatePaymentById);
    //====================== for orders========================================>    
-   var orderMgr = new OrderManager();
+   var orderMgr = new OrderService();
    var orderController = new OrderController(orderMgr);
    app.route("/api/orders")
       .get(orderController.showAllOrders)
@@ -145,7 +160,7 @@ export default function (app) {
       .delete(orderController.removeOrderById)
       .put(orderController.updateOrderById);
    //====================== for orderDetails========================================>    
-   var orderDetailsMgr = new OrderDetailManager();
+   var orderDetailsMgr = new OrderDetailService();
    var orderDetailsController = new OrderDetailController(orderDetailsMgr);
    app.route("/api/orderDetails")
       .get(orderDetailsController.showAllOrderDetails)
@@ -155,7 +170,7 @@ export default function (app) {
       .delete(orderDetailsController.removeOrderDetailById)
       .put(orderDetailsController.updateOrderDetailById);
    //====================== for feedbacks========================================>    
-   var feedbackMgr = new FeedbackManager();
+   var feedbackMgr = new FeedbackService();
    var feedbackController = new FeedbackController(feedbackMgr);
    app.route("/api/feedbacks")
       .get(feedbackController.showAllFeedbacks)
@@ -165,7 +180,7 @@ export default function (app) {
       .delete(feedbackController.removeFeedbackById)
       .put(feedbackController.updateFeedbackById);
    //====================== for deliveries========================================>    
-   var deliveryMgr = new DeliveryManager();
+   var deliveryMgr = new DeliveryService();
    var deliveryController = new DeliveryController(deliveryMgr);
    app.route("/api/deliveries")
       .get(deliveryController.showAllDeliveries)
@@ -175,7 +190,7 @@ export default function (app) {
       .delete(deliveryController.removeDeliveryById)
       .put(deliveryController.updateDeliveryById);
    //====================== for customers========================================>    
-   var customerMgr = new CustomerManager();
+   var customerMgr = new CustomerService();
    var customerController = new CustomerController(customerMgr);
    app.route("/api/customers")
       .get(customerController.showAllCustomers)
@@ -185,7 +200,7 @@ export default function (app) {
       .delete(customerController.removeCustomerById)
       .put(customerController.updateCustomerById);
    //====================== for categories========================================>    
-   var categoryMgr = new CategoryManager();
+   var categoryMgr = new CategoryService();
    var categoryController = new CategoryController(categoryMgr);
    app.route("/api/categories")
       .get(categoryController.showAllCategories)
@@ -205,7 +220,7 @@ export default function (app) {
    //    .delete(controller.removeOrderDetailById)
    //    .put(controller.updateOrderDetailById);
    //====================== for accounts========================================>    
-   var accountMgr = new AccountManager();
+   var accountMgr = new AccountService();
    var accountController = new AccountController(accountMgr);
    app.route("/api/accounts")
       .get(accountController.showAllAccounts)
@@ -216,19 +231,19 @@ export default function (app) {
       .put(accountController.updateAccountById);
 
    //====================== for users========================================>    
-   var managerMgr = new UserManager();
-   var managerController = new UserController(managerMgr);
+   var userMgr = new UserService();
+   var userController = new UserController(userMgr);
    app.route("/api/users")
-      .get(managerController.showAllUsers)
-      .post(managerController.registerNewUser);
+      .get(userController.showAllUsers)
+      .post(userController.registerNewUser);
    app.route("/api/users/:id")
-      .get(managerController.showUserById)
-      .delete(managerController.removeUserById);
+      .get(userController.showUserById)
+      .delete(userController.removeUserById);
    app.route("/api/users/:email")
-      .put(managerController.updateUserById);
+      .put(userController.updateUserById);
    //============================= for login =========================================>     
    app.route("/api/login")
-      .post(managerController.login);
+      .post(userController.login);
    //=================================================================================================>
    app.get('/home', User, (req, res, next) => {
       console.log("this is secret route");
@@ -237,10 +252,10 @@ export default function (app) {
    })
 
    //=========================================for fund managerv======================================================>
-   var mgr = new FundManager();
-   var controller = new FundController(mgr);
-   app.route("/api/fundTransactions")
-      .post(controller.insert);
+   var fundTransactionmgr = new FundTransactionService();
+   var fundTransactioncontroller = new FundController(fundTransactionmgr);
+   app.route("/api/fundtransactions")
+      .post(fundTransactioncontroller.fundTransaction);
 
 }
 

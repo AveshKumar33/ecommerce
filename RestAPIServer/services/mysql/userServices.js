@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import mysql from "./mysqlDBManager.js";
-export default class UserManager {
+export default class UserService {
   constructor() { }
 
   registerNewUser = (req, res) => {
@@ -12,7 +12,7 @@ export default class UserManager {
         if (err) {
           console.log(err);
         } else {
-          console.log(rows);
+          console.log(rows +"your registration has been successfully done ");
 
           resolve(rows);
         }

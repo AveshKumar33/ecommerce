@@ -6,10 +6,10 @@ export default class FundController {
     }
   
  
-    insert = async (req, res) => {
-      let result = await this.fundTransactionService.insert(req);
+    fundTransaction = async (req, res) => {
+      let result = await this.fundTransactionService.fundTransaction(req);
       console.log(result);
-      res.send(result);
+      res.send('transaction commit successfully');
     };
   
 

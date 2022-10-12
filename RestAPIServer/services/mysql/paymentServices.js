@@ -1,6 +1,6 @@
 
 import mysql from "./mysqlDBManager.js";
-export default class PaymentManager {
+export default class PaymentService {
   constructor() { }
 
   registerNewPayment = (req, res) => {

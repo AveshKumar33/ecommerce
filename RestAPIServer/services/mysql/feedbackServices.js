@@ -1,6 +1,6 @@
 
 import mysql from "./mysqlDBManager.js";
-export default class FeedbackManager {
+export default class FeedbackService {
   constructor() { }
 
   registerNewFeedback = (req, res) => {

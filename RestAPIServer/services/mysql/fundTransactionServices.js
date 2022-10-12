@@ -1,16 +1,16 @@
 
 import mysql from "./mysqlDBManager.js";
-export default class FundManager {
+export default class FundTransactionService {
   constructor() { }
 
-  insert = (req, res) => {
+  fundTransaction = (req, res) => {
     console.log(req.body);
-    var x = req.body.amount;
-    var y = req.body.fromaccount;
-    var z = req.body.toaccount;
+    var amount = req.body.amount;
+    var fromaccount = req.body.fromaccount;
+    var toaccount = req.body.toaccount;
     return new Promise((resolve) => {
 
-      mysql.query(`call FundTransfer(${x},${y},${z})`, (err, rows, fields) => {
+      mysql.query(`call FundTransfer(${amount},${fromaccount},${toaccount})`, (err, rows, fields) => {
         if (err) {
           console.log(err);
         } else {

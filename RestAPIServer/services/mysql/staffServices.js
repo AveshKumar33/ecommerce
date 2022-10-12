@@ -1,6 +1,6 @@
 
 import mysql from "./mysqlDBManager.js";
-export default class StaffManager {
+export default class StaffService {
   constructor() { }
 
   registerNewStaff = (req, res) => {

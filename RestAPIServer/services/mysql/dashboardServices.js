@@ -1,5 +1,5 @@
 import mysql from "./mysqlDBManager.js";
-export default class DashboardManager {
+export default class DashboardService {
   constructor() { }
 
   

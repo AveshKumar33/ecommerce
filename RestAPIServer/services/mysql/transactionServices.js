@@ -1,7 +1,7 @@
 
 import mysql from "./mysqlDBManager.js";
 
-export default class TransactionManager {
+export default class TransactionService {
   constructor() { }
 
   registerNewTransaction = (req, res) => {

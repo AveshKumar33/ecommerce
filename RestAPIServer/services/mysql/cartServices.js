@@ -1,6 +1,6 @@
 // NOTE this is : temporary here
 import mysql from "./mysqlDBManager.js";
-export default class CartManager {
+export default class CartService {
   constructor() { }
 
   insert = (req, res) => {

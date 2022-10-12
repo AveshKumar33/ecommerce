@@ -1,6 +1,6 @@
 
 import mysql from "./mysqlDBManager.js";
-export default class CategoryManager {
+export default class CategoryService {
   constructor() { }
 
   registerNewCategory = (req, res) => {
