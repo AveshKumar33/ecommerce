@@ -2,8 +2,8 @@ import UserController from '../controllers/userControllers.js';
 import UserManager from '../services/mysql/userServices.js';
 import AccountController from '../controllers/accountControllers.js';
 import AccountManager from '../services/mysql/accountServices.js';
-import CartController from '../controllers/cartControllers.js';
-import CartManager from '../services/mysql/cartServices.js';
+//import CartController from '../controllers/cartControllers.js';
+//import CartManager from '../services/mysql/cartServices.js';
 import CategoryController from '../controllers/categoryControllers.js';
 import CategoryManager from '../services/mysql/categorieServices.js';
 import CustomerController from '../controllers/customerControllers.js';
@@ -30,10 +30,47 @@ import VendorController from '../controllers/vendorControllers.js';
 import VendorManager from '../services/mysql/vendorServices.js';
 import FundController from '../controllers/fundTransactionControllers.js';
 import FundManager from '../services/mysql/fundTransactionServices.js';
+
+import DashboardController from '../controllers/dashboard/dashboardControllers.js';
+import DashboardManager from '../services/mysql/dashboardServices.js';
+
 import User from '../services/middlewares/user.js';
 
 
 export default function (app) {
+   //==========================for  my dashboards===============================================================>
+   var dashboardMgr = new DashboardManager();
+   var dashboardController = new DashboardController(dashboardMgr);
+
+   app.route("/api/orders/topten")
+      .get(dashboardController.topTenOrders);
+   app.route("/api/customers/topten")
+      .get(dashboardController.topTenCustomers);
+   app.route("/api/sellers/topten")
+      .get(dashboardController.topTenSellers);
+   app.route("/api/vendors/topten")
+      .get(dashboardController.topTenVendors);
+   app.route("/api/products/topten")
+      .get(dashboardController.topTenProducts);
+   app.route("/api/orders/status")
+      .get(dashboardController.orderstatus);
+   app.route("/api/products/availableproducts")
+      .get(dashboardController.availableProducts);
+   app.route("/api/products/unavailableproducts")
+      .get(dashboardController.unavailableProducts);
+   app.route("/api/products/productsbycategory")
+      .get(dashboardController.productByCategoryName);
+   app.route("/api/products/countproductincatalog")
+      .get(dashboardController.productCountOfEachCategory);
+   app.route("/api/customers/profile")
+      .get(dashboardController.customerProfile);
+   app.route("/api/vendors/profile")
+      .get(dashboardController.vendorProfile);
+   app.route("/api/sellers/profile")
+      .get(dashboardController.sellerProfile);
+   app.route("/api/staff/profile")
+      .get(dashboardController.staffProfile);
+
    //====================== for vendorss========================================>    
    var vendorMgr = new VendorManager();
    var vendorController = new VendorController(vendorMgr);
@@ -107,9 +144,6 @@ export default function (app) {
       .get(orderController.showOrderById)
       .delete(orderController.removeOrderById)
       .put(orderController.updateOrderById);
-
-   app.route("/api/orders/topten")
-      .get(orderController.topTenOrders);
    //====================== for orderDetails========================================>    
    var orderDetailsMgr = new OrderDetailManager();
    var orderDetailsController = new OrderDetailController(orderDetailsMgr);
@@ -160,7 +194,7 @@ export default function (app) {
       .get(categoryController.showCategoryById)
       .delete(categoryController.removeCategoyById)
       .put(categoryController.updateCategoryById);
-   //====================== for carts======== this is : temporary================================>    
+   //====================== for carts======== this is : temporary store here================================>    
    // var mgr = new CartManager();
    // var controller = new CartController(mgr);
    // app.route("/api/carts")

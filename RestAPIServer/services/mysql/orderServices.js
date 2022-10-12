@@ -62,15 +62,5 @@ export default class OrderManager {
       });
     });
   };
-  topTenOrders = () => {
-    console.log('order dal')
-    return new Promise((resolve) => {
-    
-      let command = `select orderid,count(*) mostPaymentsOnOrders from payments group by orderid order by mostPaymentsOnOrders desc limit 10 `;
-      console.log(command);
-      mysql.query(command, (err, rows, fields) => {
-        resolve(rows);
-      });
-    });
-  };
+
 }

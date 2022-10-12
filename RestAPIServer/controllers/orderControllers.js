@@ -35,11 +35,5 @@ export default class OrderController {
     console.log(result);
     res.send(result);
   };
-  topTenOrders = async (req, res) => {
-    
-    let data = [];
-    data = await orderService.topTenOrders();
-    console.log('top ten orders');
-    res.send(data);
-  };
+
 }

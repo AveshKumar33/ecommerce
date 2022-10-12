@@ -35,9 +35,5 @@ export default class PaymentController {
     console.log(result);
     res.send(result);
   };
-  topTenOrders = async (req, res) => {
-    let result = await this.paymentService.topTenOrders();
-    res.send(result);
-    console.log(result);
-  };
+ 
 }
