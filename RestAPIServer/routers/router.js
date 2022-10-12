@@ -133,8 +133,7 @@ export default function (app) {
       .get(productController.showAllProducts);
 
    app.post("/api/products", User, productController.registerNewProduct);
-
-   // .post(controller.post);
+   
    app.route("/api/product/:id")
       .get(productController.showProductById)
       .delete(productController.removeProductById)
@@ -248,7 +247,6 @@ export default function (app) {
    app.get('/home', User, (req, res, next) => {
       console.log("this is secret route");
       res.send("this is secret route");
-
    })
 
    //=========================================for fund managerv======================================================>

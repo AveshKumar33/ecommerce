@@ -8,7 +8,6 @@ export default class ProductController {
   showAllProducts = async (req, res) => {
     let result = await this.productService.showAllProducts();
     res.send(result);
-    console.log(result);
   };
 
   showProductById = async (req, res) => {

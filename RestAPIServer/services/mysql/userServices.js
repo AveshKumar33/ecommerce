@@ -13,7 +13,6 @@ export default class UserService {
           console.log(err);
         } else {
           console.log(rows +"your registration has been successfully done ");
-
           resolve(rows);
         }
       });
@@ -74,6 +73,7 @@ export default class UserService {
 
         let allUsersStr = JSON.stringify(rows);
         var allUsers = JSON.parse(allUsersStr);
+        //console.log(allUsers[0].email+"this data caming from database");
         if (allUsers.length > 0) {
           const token = jwt.sign({
             email: allUsers[0].email,
